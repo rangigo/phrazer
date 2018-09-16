@@ -1,23 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Provider } from "react-redux";
+import LoginScreen from "./components/LoginScreen";
+import { createStore } from "../../Users/kwoldrich/Library/Caches/typescript/3.0/node_modules/redux";
+import reducers from "./reducers";
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
+export default () => (
+  <Provider store={createStore(reducers)}>
+    <LoginScreen />
+  </Provider>
+);
