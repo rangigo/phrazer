@@ -1,3 +1,3 @@
-# myDic
+# Phrazer client 
 
-A Private Dictionary
+Client application for mobile devices build with React Native Framework.
