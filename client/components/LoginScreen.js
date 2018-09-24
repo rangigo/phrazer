@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
   },
   loginBtn: {
     paddingHorizontal: 25,
-    paddingVertical: 8,
-    marginBottom: 10,
+    paddingVertical: 14,
+    marginBottom: 14,
     backgroundColor: '#3B7A77',
     borderRadius: 3
   },
