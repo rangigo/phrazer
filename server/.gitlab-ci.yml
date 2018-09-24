@@ -2,7 +2,7 @@ image: node:latest
 
 cache:
   paths:
-    - /server/functions/node_modules/
+    - functions/node_modules/
 
 deploy_production:
   stage: deploy
@@ -10,7 +10,6 @@ deploy_production:
   only:
     - server
   script:
-    - cd /server
     - npm install -g firebase-tools
     - npm install
     - firebase use --token $FIREBASE_DEPLOY_KEY production
