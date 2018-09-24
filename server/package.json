@@ -1,0 +1,26 @@
+{
+  "name": "phrazer-server",
+  "version": "0.0.1",
+  "description": "Server for Phrazer mobile application.",
+  "scripts": {
+    "prebuild": "node node_modules/rimraf/bin dist/functions",
+    "build": "babel src --out-dir dist --copy-files --ignore node_modules",
+    "postbuild": "cpx '*{package.json,package-lock.json}' dist/functions && npm run-script custom_postpostbuild",
+    "custom_postpostbuild": "cd dist/functions && npm i -s",
+    "start": "npm run-script build && sudo firebase serve --only functions,hosting",
+    "deploy": "firebase deploy --only functions"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "firebase-admin": "~6.0.0",
+    "firebase-functions": "^2.0.3"
+  },
+  "private": true,
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "cpx": "^1.5.0",
+    "rimraf": "^2.6.2"
+  }
+}
