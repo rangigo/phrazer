@@ -1,31 +1,37 @@
-import React from 'react'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import React from "react";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 import {
   createSwitchNavigator,
   createStackNavigator,
   createDrawerNavigator
-} from 'react-navigation'
-import { Icon } from 'react-native-elements'
+} from "react-navigation";
+import { Icon } from "react-native-elements";
 
-import reducers from './reducers'
-import LoginScreen from './components/LoginScreen'
-import HomeScreen from './containers/HomeScreen'
+import reducers from "./reducers";
+import LoginScreen from "./components/LoginScreen";
+import HomeScreen from "./containers/HomeScreen";
+import Expo from "expo";
+
+Expo.Font.loadAsync({
+  Roboto: require("./fonts/Roboto/Roboto-Regular.ttf")
+});
 
 const Drawer = createDrawerNavigator(
   {
     Home: HomeScreen,
     Shop: HomeScreen,
-    Conversation: HomeScreen,
-  }, {
+    Conversation: HomeScreen
+  },
+  {
     contentOptions: {
       labelStyle: {
-        color: '#4AA9A8',
-        fontFamily: 'Roboto'
+        color: "#4AA9A8",
+        fontFamily: "Roboto"
       }
     }
   }
-)
+);
 
 const Nav = createStackNavigator(
   {
@@ -33,7 +39,7 @@ const Nav = createStackNavigator(
   },
   {
     navigationOptions: ({ navigation }) => ({
-      title: 'Finnish',
+      title: "Finnish",
       headerLeft: (
         <Icon
           name="menu"
@@ -50,23 +56,23 @@ const Nav = createStackNavigator(
         />
       ),
       headerStyle: {
-        backgroundColor: '#4AA9A8'
+        backgroundColor: "#4AA9A8"
       },
       headerTitleStyle: {
-        fontFamily: 'Roboto',
-        color: 'white'
+        fontFamily: "Roboto",
+        color: "white"
       }
     })
   }
-)
+);
 
 const Switch = createSwitchNavigator({
   LoginScreen,
   Nav
-})
+});
 
 export default () => (
   <Provider store={createStore(reducers)}>
     <Switch />
   </Provider>
-)
+);
