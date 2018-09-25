@@ -1,51 +1,59 @@
-import React from "react";
-import { Provider } from "react-redux";
-import { createStore } from "redux";
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import {
   createSwitchNavigator,
   createStackNavigator,
-  createDrawerNavigator
-} from "react-navigation";
-import { Icon } from "react-native-elements";
+  createDrawerNavigator,
+} from 'react-navigation';
+import { Icon } from 'react-native-elements';
 
-import reducers from "./reducers";
-import LoginScreen from "./components/LoginScreen";
-import HomeScreen from "./containers/HomeScreen";
-import Expo from "expo";
+import reducers from './reducers';
+import LoginScreen from './components/LoginScreen';
+import HomeScreen from './containers/HomeScreen';
+import Expo from 'expo';
+import DrawerContainer from './components/DrawerContainer';
+import ChatScreen from './containers/ChatScreen';
+import FeedScreen from './containers/FeedScreen';
 
 Expo.Font.loadAsync({
-  Roboto: require("./fonts/Roboto/Roboto-Regular.ttf")
+  Roboto: require('./fonts/Roboto/Roboto-Regular.ttf'),
 });
 
-const Drawer = createDrawerNavigator(
+const CategoriesDrawer = createDrawerNavigator(
   {
     Home: HomeScreen,
-    Shop: HomeScreen,
-    Conversation: HomeScreen
+    Conversation: ChatScreen,
+    Feed: FeedScreen,
   },
   {
     contentOptions: {
       labelStyle: {
-        color: "#4AA9A8",
-        fontFamily: "Roboto"
-      }
-    }
-  }
+        fontFamily: 'Roboto',
+      },
+      activeTintColor: '#4AA9A8',
+      activeBackgroundColor: 'white',
+      inactiveBackgroundColor: 'white',
+      inactiveTintColor: '#727272',
+    },
+    contentComponent: DrawerContainer,
+  },
 );
 
-const Nav = createStackNavigator(
+const RootStack = createStackNavigator(
   {
-    Drawer
+    CategoriesDrawer,
   },
   {
     navigationOptions: ({ navigation }) => ({
-      title: "Finnish",
+      title: 'Finnish',
       headerLeft: (
         <Icon
           name="menu"
           color="white"
           containerStyle={{ marginLeft: 20 }}
           onPress={() => navigation.toggleDrawer()}
+          underlayColor="#ffffff00"
         />
       ),
       headerRight: (
@@ -56,19 +64,19 @@ const Nav = createStackNavigator(
         />
       ),
       headerStyle: {
-        backgroundColor: "#4AA9A8"
+        backgroundColor: '#4AA9A8',
       },
       headerTitleStyle: {
-        fontFamily: "Roboto",
-        color: "white"
-      }
-    })
-  }
+        fontFamily: 'Roboto',
+        color: 'white',
+      },
+    }),
+  },
 );
 
 const Switch = createSwitchNavigator({
   LoginScreen,
-  Nav
+  RootStack,
 });
 
 export default () => (
