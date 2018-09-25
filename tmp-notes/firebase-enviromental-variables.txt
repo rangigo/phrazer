@@ -1,0 +1,11 @@
+#Local host
+sudo firebase functions:config:set db.uri="mongodb://localhost" db.db="MyNewDB" db.user="test1234" db.pass="123456"
+
+#Development server
+firebase functions:config:set db.uri="" db.db="" db.user="" db.pass=""
+
+#View of variables
+sudo firebase functions:config:get
+
+#Manual setup localhost
+firebase functions:config:get > .runtimeconfig.json

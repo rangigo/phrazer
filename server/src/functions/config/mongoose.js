@@ -1,15 +1,17 @@
 import mongoose from "mongoose";
 
-const mongooseConfig = db_url => {
+const mongooseConfig = ({ host, db, user, pass, port }) => {
   mongoose.connect(
-    db_url,
-    { useNewUrlParser: true }
+    "mongodb://" + user + ":" + pass + "@" + host + ":" + port + "/" + db,
+    {
+      useNewUrlParser: true
+    }
   );
 
-  const db = mongoose.connection;
+  const dbConnection = mongoose.connection;
 
-  db.on("error", console.error.bind(console, "connection error:"));
-  db.once("open", function() {
+  dbConnection.on("error", console.error.bind(console, "connection error:"));
+  dbConnection.once("open", function() {
     console.log("Database connected.");
   });
 };

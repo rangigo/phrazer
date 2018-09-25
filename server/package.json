@@ -7,7 +7,7 @@
     "build": "babel src --out-dir dist --copy-files --ignore node_modules",
     "postbuild": "cpx '*{package.json,package-lock.json}' dist/functions && npm run-script custom_postpostbuild",
     "custom_postpostbuild": "cd dist/functions && npm i -s",
-    "start": "npm run-script build && sudo firebase serve --only functions,hosting",
+    "start": "npm run-script build && sudo firebase functions:config:get > dist/functions/.runtimeconfig.json && sudo firebase serve --only functions,hosting",
     "deploy": "firebase deploy --only functions"
   },
   "dependencies": {
