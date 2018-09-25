@@ -2,10 +2,6 @@ import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
 const phUserSchema = new Schema({
-  id: {
-    type: String,
-    required: true
-  },
   fullName: {
     type: String,
     required: true

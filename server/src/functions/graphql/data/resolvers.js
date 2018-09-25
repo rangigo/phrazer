@@ -3,39 +3,55 @@ import User from "./../../model/PhUser";
 const resolvers = {
   Query: {
     getUsers: () => {
-      let result;
-
-      User.find()
+      let result = User.find({})
         .exec()
         .then(users => {
-          result = users;
+          return users;
         })
         .catch(err => {
-          console.log("Error when obtaining Users.");
+          console.log(err);
         });
+
+      console.log(result);
+
       return result;
     }
   },
   Mutation: {
     createUser: (obj, args, context, info) => {
-      let newUser = new User(args.input);
-
-      newUser.save().catch(err => {
-        console.log("Error when creating user.");
-      });
+      console.log(args);
+      const newUser = new User(args);
+      newUser
+        .save()
+        .then(saveUser => {
+          console.log(saveUser);
+        })
+        .catch(err => {
+          console.log(err);
+        });
 
       return newUser;
     },
     updateUser: (obj, args, context, info) => {
-      console.log("Updating user");
-      console.log(args);
+      const updatedUser = User.findByIdAndUpdate(args.id, args, {
+        new: true,
+        upsert: true
+      })
+        .exec()
+        .catch(err => {
+          console.log(err);
+        });
 
-      return null;
+      return updatedUser;
     },
     deleteUser: (obj, args, context, info) => {
-      console.log("Deleting user");
-      console.log(args);
-      return null;
+      const removedUser = User.findByIdAndRemove(args.id)
+        .exec()
+        .catch(err => {
+          console.log(err);
+        });
+
+      return removedUser;
     }
   }
 };
