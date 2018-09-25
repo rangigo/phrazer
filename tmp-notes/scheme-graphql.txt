@@ -1,0 +1,51 @@
+    type User {
+        id: String!
+        fullName: String!
+        email: String!
+        password: String!
+        # goal: Goal
+        conversations: [Conversation]
+        dictionaries: [Dictionary]
+    }
+
+    type Dictionary {
+        id: String!
+        name: String
+        user: User!
+        phrases: [Phrase]
+        nativeLanguage: String!
+        foreignLanguage: String!
+    }
+
+    type Phrase {
+        id: String!
+        nativeSentence: Sentence!
+        foreignSentence: Sentence
+        user: User!
+        categories: [Category]
+    }
+
+    type Category {
+        id: String!
+        name: String!
+        description: String
+    }
+
+    type Sentence {
+        id: String!
+        sentence: String!
+        language: String!
+        soundFileUrl: String
+    }
+
+    type Conversation {
+        id: String!
+        participants: [User]
+        messages: [ChatMessage]
+    }
+
+    type ChatMessage {
+        id: String!
+        content: String!
+        timestamp: Int!
+    }
