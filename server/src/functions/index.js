@@ -22,6 +22,6 @@ expressApp.get("/user", (request, response) => {
   response.send("Ha ha, you smart as*.");
 });
 
-server.applyMiddleware({ expressApp, path: '/graphql' });
+server.applyMiddleware({ app: expressApp, path: "/graphql" });
 
 export const app = funcs.https.onRequest(expressApp);
