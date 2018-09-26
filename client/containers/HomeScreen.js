@@ -1,56 +1,17 @@
 import React, { Component } from 'react';
 
 import { View, StyleSheet, FlatList } from 'react-native';
-import { Icon, CheckBox } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import Text from '../components/MyText';
-
-const newPhrazes = [
-  {
-    phraze: 'Ban ten gi la gi va song o dau?',
-    translated: "What's your name and where do you live?",
-    key: '1',
-    public: true,
-    phrazed: false,
-    favorite: false,
-  },
-  {
-    phraze: 'Ban ten gi la gi va song o dau?',
-    translated: "What's your name and where do you live?",
-    key: '2',
-    public: true,
-    phrazed: false,
-    favorite: false,
-  },
-  {
-    phraze: 'Ban ten gi la gi va song o dau?',
-    translated: "What's your name and where do you live?",
-    key: '3',
-    public: false,
-    phrazed: false,
-    favorite: true,
-  },
-  {
-    phraze: 'Ban ten gi la gi va song o dau?',
-    translated: "What's your name and where do you live?",
-    key: '4',
-    public: true,
-    phrazed: false,
-    favorite: true,
-  },
-  {
-    phraze: 'Ban ten gi la gi va song o dau?',
-    translated: "What's your name and where do you live?",
-    key: '5',
-    public: true,
-    phrazed: false,
-    favorite: false,
-  },
-];
+import { newPhrazes } from './data';
+import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet';
+import Phraze from '../components/Phraze';
+import NewPhrazeOption from '../components/NewPhrazeOption';
 
 class HomeScreen extends Component {
   static navigationOptions = {
     drawerLabel: 'Home',
-    drawerIcon: ({ tintColor }) => <Icon name="home" color={tintColor} />,
+    drawerIcon: ({ tintColor }) => <Icon name="home" color={tintColor} />
   };
 
   state = {
@@ -62,7 +23,7 @@ class HomeScreen extends Component {
         key: '6',
         public: true,
         phrazed: false,
-        favorite: true,
+        favorite: true
       },
       {
         phraze: 'Ban thich MERN Stack hay khong?',
@@ -70,7 +31,7 @@ class HomeScreen extends Component {
         key: '7',
         public: false,
         phrazed: true,
-        favorite: true,
+        favorite: true
       },
       {
         phraze: 'Toi dang xem anime Attack on Titan',
@@ -78,11 +39,11 @@ class HomeScreen extends Component {
         key: '8',
         public: false,
         phrazed: true,
-        favorite: false,
-      },
+        favorite: false
+      }
     ],
     page: 1,
-    showTip: true,
+    showTip: true
   };
 
   componentDidMount() {
@@ -96,11 +57,11 @@ class HomeScreen extends Component {
       if (this.state.page === 1) {
         this.setState({
           phrazes: this.state.phrazes.concat(newPhrazes),
-          page: 2,
+          page: 2
         });
       }
       this.setState({
-        refreshing: false,
+        refreshing: false
       });
     }, 1000);
   };
@@ -127,70 +88,32 @@ class HomeScreen extends Component {
   };
 
   renderItem = ({ item }) => {
-    return (
-      <View style={styles.phrazeContainer}>
-        <View style={styles.col1}>
-          <CheckBox
-            containerStyle={styles.checkBoxContainer}
-            iconType="material"
-            checkedIcon="people"
-            uncheckedIcon="people"
-            checkedColor="#33AAAA"
-            checked={item.public}
-            onPress={() => this.onPressCheckBox(item.key, 'public')}
-          />
-          <CheckBox
-            containerStyle={styles.checkBoxContainer}
-            iconType="material"
-            checkedIcon="check-box"
-            uncheckedIcon="check-box-outline-blank"
-            checkedColor="#33AAAA"
-            checked={item.phrazed}
-            onPress={() => this.onPressCheckBox(item.key, 'phrazed')}
-          />
-        </View>
-        <View style={styles.col2}>
-          <Text style={{ fontSize: 16 }}>{item.phraze}</Text>
-          <Text style={{ color: '#B2B2B2', fontSize: 16 }}>
-            {item.translated}
-          </Text>
-        </View>
-        <View style={styles.col3}>
-          <Icon name="volume-mute" color="#ccc" size={30} />
-        </View>
-        <View style={styles.col4}>
-          <Icon name="more-horiz" />
-          <CheckBox
-            containerStyle={styles.checkBoxContainer}
-            iconType="material"
-            checkedIcon="star"
-            uncheckedIcon="star-border"
-            checkedColor="#F6BF26"
-            checked={item.favorite}
-            onPress={() => this.onPressCheckBox(item.key, 'favorite')}
-          />
-        </View>
-      </View>
-    );
+    return <Phraze item={item} onPressCheckBox={this.onPressCheckBox} />;
   };
 
+  NewPhrazeOptions = [
+    { title: 'Add new phraze', icon: 'translate' },
+    { title: 'Add new category', icon: 'list' },
+    { title: 'Add new library', icon: 'local-library' }
+  ];
+
   render() {
+    const { navigation } = this.props;
+
     const phrazeTip = this.state.showTip ? (
       <View style={styles.phrazeTip}>
-        <View style={styles.col1}>
+        <View style={{ flex: 0.2, paddingHorizontal: 10 }}>
           <Icon name="check-box" color="white" />
         </View>
         <View
           style={{
             flex: 0.7,
-            paddingHorizontal: 10,
+            paddingHorizontal: 10
           }}
         >
-          <Text style={{ fontSize: 16 }}>
-            Tap a select box if you have learned the phraze.
-          </Text>
+          <Text>Tap a select box if you have learned the phraze.</Text>
         </View>
-        <View style={styles.col4}>
+        <View style={{ flex: 0.1, paddingHorizontal: 10 }}>
           <Icon
             name="cancel"
             color="#848484"
@@ -209,6 +132,40 @@ class HomeScreen extends Component {
           data={this.state.phrazes}
           renderItem={this.renderItem}
         />
+        <Icon
+          name="add"
+          containerStyle={styles.addButton}
+          color="white"
+          onPress={() => this.ActionSheet.show()}
+          underlayColor="#33AAAA"
+          raised
+        />
+        <ActionSheet
+          ref={o => (this.ActionSheet = o)}
+          title={
+            <Text style={{ color: '#727272', fontSize: 18 }}>
+              Choose option
+            </Text>
+          }
+          options={this.NewPhrazeOptions.map(el => (
+            <NewPhrazeOption title={el.title} icon={el.icon} />
+          )).concat(<Text>Cancel</Text>)}
+          cancelButtonIndex={3}
+          onPress={index => {
+            switch (index) {
+              case 0:
+                navigation.navigate('NewPhrazeScreen');
+                break;
+              case 1:
+                navigation.navigate('NewPhrazeScreen');
+                break;
+              case 2:
+                navigation.navigate('NewPhrazeScreen');
+                break;
+            }
+          }}
+        />
+
         {/* <Text onPress={() => navigation.navigate('LoginScreen')}>go back</Text> */}
       </View>
     );
@@ -219,46 +176,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   phrazeTip: {
     paddingVertical: 10,
     backgroundColor: '#D7D7D7',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
-  phrazeContainer: {
-    paddingVertical: 23,
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  col1: {
-    flex: 0.2,
-    paddingHorizontal: 10,
-    alignItems: 'center',
-  },
-  col2: {
-    flex: 0.6,
-    paddingHorizontal: 10,
-  },
-  col3: {
-    flex: 0.1,
-    paddingHorizontal: 10,
-  },
-  col4: {
-    flex: 0.1,
-    paddingHorizontal: 10,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  checkBoxContainer: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 0,
-    padding: 0,
-    margin: 0,
-    width: 24,
-  },
+  addButton: {
+    position: 'absolute',
+    bottom: 15,
+    right: 15,
+    borderRadius: 50,
+    borderWidth: 1,
+    borderColor: '#33AAAA',
+    width: 50,
+    height: 50,
+    backgroundColor: '#33AAAA'
+  }
 });
 
 export default HomeScreen;
