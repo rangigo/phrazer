@@ -1,11 +1,14 @@
 #Local host
-sudo firebase functions:config:set db.uri="mongodb://localhost" db.db="MyNewDB" db.user="test1234" db.pass="123456"
+sudo firebase functions:config:set db.uri="mongodb://localhost" db.db="MyNewDB"
 
 #Development server
-firebase functions:config:set db.uri="" db.db="" db.user="" db.pass=""
+firebase functions:config:set db.host="" db.port="" db.db="" db.user="" db.pass=""
 
 #View of variables
 sudo firebase functions:config:get
 
 #Manual setup localhost
 firebase functions:config:get > .runtimeconfig.json
+
+#Dev online db
+mongodb://<dbuser>:<dbpassword>@ds111913.mlab.com:11913/phrazer-dev

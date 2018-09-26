@@ -1,8 +1,16 @@
 import mongoose from "mongoose";
 
 const mongooseConfig = ({ host, db, user, pass, port }) => {
+  let uri;
+
+  if (!user || !pass) {
+    uri = "mongodb://" + "@" + host + ":" + port + "/" + db;
+  } else {
+    uri = "mongodb://" + user + ":" + pass + "@" + host + ":" + port + "/" + db;
+  }
+
   mongoose.connect(
-    "mongodb://" + user + ":" + pass + "@" + host + ":" + port + "/" + db,
+    uri,
     {
       useNewUrlParser: true
     }
