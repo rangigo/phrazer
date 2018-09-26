@@ -135,9 +135,9 @@ class HomeScreen extends Component {
         <Icon
           name="add"
           containerStyle={styles.addButton}
-          color="white"
           onPress={() => this.ActionSheet.show()}
-          underlayColor="#33AAAA"
+          color="#33AAAA"
+          reverse
           raised
         />
         <ActionSheet
@@ -187,13 +187,7 @@ const styles = StyleSheet.create({
   addButton: {
     position: 'absolute',
     bottom: 15,
-    right: 15,
-    borderRadius: 50,
-    borderWidth: 1,
-    borderColor: '#33AAAA',
-    width: 50,
-    height: 50,
-    backgroundColor: '#33AAAA'
+    right: 15
   }
 });
 
