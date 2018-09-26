@@ -4,8 +4,9 @@ import { createStore } from 'redux';
 import {
   createSwitchNavigator,
   createStackNavigator,
-  createDrawerNavigator,
+  createDrawerNavigator
 } from 'react-navigation';
+import createDismissableStackNavigator from './helpers/createDissmissableStackNavigator';
 import { Icon } from 'react-native-elements';
 
 import reducers from './reducers';
@@ -15,34 +16,35 @@ import Expo from 'expo';
 import DrawerContainer from './components/DrawerContainer';
 import ChatScreen from './containers/ChatScreen';
 import FeedScreen from './containers/FeedScreen';
+import NewPhrazeScreen from './containers/NewPhrazeScreen';
 
 Expo.Font.loadAsync({
-  Roboto: require('./fonts/Roboto/Roboto-Regular.ttf'),
+  Roboto: require('./fonts/Roboto/Roboto-Regular.ttf')
 });
 
 const CategoriesDrawer = createDrawerNavigator(
   {
     Home: HomeScreen,
     Conversation: ChatScreen,
-    Feed: FeedScreen,
+    Feed: FeedScreen
   },
   {
     contentOptions: {
       labelStyle: {
-        fontFamily: 'Roboto',
+        fontFamily: 'Roboto'
       },
       activeTintColor: '#4AA9A8',
       activeBackgroundColor: 'white',
       inactiveBackgroundColor: 'white',
-      inactiveTintColor: '#727272',
+      inactiveTintColor: '#727272'
     },
-    contentComponent: DrawerContainer,
-  },
+    contentComponent: DrawerContainer
+  }
 );
 
-const RootStack = createStackNavigator(
+const MainStack = createStackNavigator(
   {
-    CategoriesDrawer,
+    CategoriesDrawer
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -64,19 +66,47 @@ const RootStack = createStackNavigator(
         />
       ),
       headerStyle: {
-        backgroundColor: '#4AA9A8',
+        backgroundColor: '#4AA9A8'
       },
       headerTitleStyle: {
         fontFamily: 'Roboto',
-        color: 'white',
-      },
-    }),
+        color: 'white'
+      }
+    })
+  }
+);
+
+const NewPhrazeStack = createDismissableStackNavigator(
+  {
+    NewPhrazeScreen
   },
+  {
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: '#4AA9A8'
+      },
+      headerTitleStyle: {
+        fontFamily: 'Roboto',
+        color: 'white'
+      }
+    }
+  }
+);
+
+const RootStack = createStackNavigator(
+  {
+    MainStack,
+    NewPhrazeStack
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none'
+  }
 );
 
 const Switch = createSwitchNavigator({
   LoginScreen,
-  RootStack,
+  RootStack
 });
 
 export default () => (
