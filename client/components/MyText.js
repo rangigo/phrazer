@@ -1,9 +1,13 @@
-import React from 'React'
+import React from 'React';
 
-import { Text } from 'react-native-elements'
+import { Text } from 'react-native-elements';
 
 const MyText = ({ children, ...rest }) => {
-  return <Text style={{fontFamily: 'Roboto'}} {...rest}>{children}</Text>
-}
+  return (
+    <Text style={{ fontFamily: 'Roboto', fontSize: 16 }} {...rest}>
+      {children}
+    </Text>
+  );
+};
 
-export default MyText
+export default MyText;
