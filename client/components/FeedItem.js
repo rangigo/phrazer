@@ -5,34 +5,32 @@ import Text from "./MyText";
 
 const FeedItem = ({ item, onPressCheckBox }) => {
   return (
-    <View>
-      <View style={styles.phrazeContainer}>
-        <View style={styles.col1}>
-          <Icon name="face" />
-        </View>
-        <View style={styles.col2}>
-          <Text>{item.phraze}</Text>
-          <Text style={{ color: "#B2B2B2" }}>{item.translated}</Text>
-        </View>
-        <View style={styles.col3}>
+    <View style={styles.phrazeContainer}>
+      <View style={styles.col1}>
+        <Icon name="face" />
+      </View>
+      <View style={styles.col2}>
+        <Text>{item.phraze}</Text>
+        <Text style={{ color: "#B2B2B2" }}>{item.translated}</Text>
+      </View>
+      <View style={styles.col3}>
+        <View style={styles.col3row1}>
           <Icon name="volume-mute" color="#ccc" size={30} />
-        </View>
-        <View style={styles.col4}>
           <Icon name="more-horiz" />
         </View>
-      </View>
-      <View>
-        <Button
-          title="Add +"
-          buttonStyle={{
-            backgroundColor: "#FF5E00",
-            width: 0.2,
-            height: 0.2,
-            borderWidth: 0,
-            borderRadius: 5
-          }}
-          containerStyle={{ marginTop: 20 }}
-        />
+        <View style={styles.col3row2}>
+          <Button
+            title="Add +"
+            buttonStyle={{
+              backgroundColor: "#FF5E00",
+              borderWidth: 0,
+              borderRadius: 5,
+              paddingHorizontal: 10,
+              paddingVertical: 2
+            }}
+            containerStyle={{ margin: 0 }}
+          />
+        </View>
       </View>
     </View>
   );
@@ -51,17 +49,23 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   col2: {
-    flex: 0.6,
+    flex: 0.5,
     paddingHorizontal: 10
   },
   col3: {
-    flex: 0.1,
+    flexDirection: "column",
+    flex: 0.3,
     paddingHorizontal: 10
   },
-  col4: {
-    flex: 0.1,
-    paddingHorizontal: 10,
-    justifyContent: "space-between",
+  col3row1: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginBottom: 20
+  },
+  col3row2: {
+    flexDirection: "row",
+    justifyContent: "space-around",
     alignItems: "center"
   },
   checkBoxContainer: {

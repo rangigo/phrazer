@@ -10,7 +10,7 @@ import NewPhrazeOption from "../components/NewPhrazeOption";
 class FeedScreen extends Component {
   static navigationOptions = {
     drawerLabel: "Feed",
-    drawerIcon: ({ tintColor }) => <Icon name="spa" color={tintColor} />
+    drawerIcon: ({ tintColor }) => <Icon name="public" color={tintColor} />
   };
 
   state = {
@@ -65,27 +65,6 @@ class FeedScreen extends Component {
     }, 1000);
   };
 
-  onPressCheckBox = (key, opt) => {
-    const newPhrazes = this.state.phrazes.map(el => {
-      if (el.key === key) {
-        switch (opt) {
-          case "public":
-            el.public = !el.public;
-            return el;
-          case "phrazed":
-            el.phrazed = !el.phrazed;
-            return el;
-          case "favorite":
-            el.favorite = !el.favorite;
-            return el;
-        }
-      }
-      return el;
-    });
-
-    this.setState({ phrazes: newPhrazes });
-  };
-
   renderItem = ({ item }) => {
     return <FeedItem item={item} onPressCheckBox={this.onPressCheckBox} />;
   };
@@ -105,6 +84,7 @@ class FeedScreen extends Component {
           onRefresh={this.fetchData}
           data={this.state.phrazes}
           renderItem={this.renderItem}
+          ListFooterComponent={() => <View style={styles.listFooter} />}
         />
         <Icon
           name="add"
@@ -145,6 +125,9 @@ class FeedScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  listFooter: {
+    height: 100
+  },
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
