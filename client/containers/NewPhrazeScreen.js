@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { ScrollView, View, StyleSheet } from 'react-native';
 import Text from '../components/MyText';
-import { Icon, CheckBox } from 'react-native-elements';
+import { Icon, CheckBox, Button } from 'react-native-elements';
 import { Dropdown } from 'react-native-material-dropdown';
 import { TextField } from 'react-native-material-textfield';
+
+import * as actions from '../actions';
 
 const data = [
   { value: 'Finnish' },
@@ -24,18 +27,35 @@ class NewPhrazeScreen extends Component {
       />
     ),
     headerTitle: 'New Phraze',
-    headerRight: <Text style={{ marginRight: 20, color: 'white' }}>SAVE</Text>
+    headerRight: <Button buttonStyle={styles.saveButton} title="SAVE" onPress={() => navigation.state.params.handleSave()} />
   });
 
   state = {
     category: '',
     phraze: '',
-    translation: '',
+    translated: '',
     isPublic: false
   };
 
+  componentDidMount() {
+    this.props.navigation.setParams({ handleSave: this.onPressSave})
+  }
+
+  onPressSave = () => {
+    const phraze = {
+      category: this.state.category,
+      phraze: this.state.phraze,
+      translated: this.state.translated,
+      public: this.state.isPublic,
+      phrazed: false,
+      favorite: false,
+    }
+    this.props.onSavePhraze(phraze)
+    this.props.navigation.dismiss()
+  }
+
   render() {
-    const { category, phraze, translation, isPublic } = this.state;
+    const { category, phraze, translated, isPublic } = this.state;
 
     return (
       <ScrollView style={styles.container}>
@@ -56,8 +76,8 @@ class NewPhrazeScreen extends Component {
 
         <TextField
           label="Translation"
-          value={translation}
-          onChangeText={translation => this.setState({ translation })}
+          value={translated}
+          onChangeText={translated => this.setState({ translated })}
           tintColor="#33AAAA"
           multiline
         />
@@ -93,7 +113,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    padding: 15,
+    padding: 15
   },
   recordContainer: {
     flex: 1,
@@ -108,7 +128,18 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     marginRight: 0,
     marginVertical: 0
+  },
+  saveButton: {
+    backgroundColor: 'transparent',
+    padding: 3,
   }
 });
 
-export default NewPhrazeScreen;
+const mapDispatchToProps = dispatch => ({
+  onSavePhraze: phraze => dispatch(actions.addPhraze(phraze))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(NewPhrazeScreen);

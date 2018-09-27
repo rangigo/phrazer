@@ -1,6 +1,4 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
+import phrazeReducer from './phrazeReducer';
 
-const demoReducer = (state = {}, action) => {
-  return state;
-};
-export default combineReducers({ demoReducer });
+export default combineReducers({ phraze: phrazeReducer });

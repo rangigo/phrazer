@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { Icon } from 'react-native-elements';
+
+import * as actions from '../actions'
 import { newPhrazes } from './data';
 import Phraze from '../components/Phraze';
 import PhrazeTip from '../components/PhrazeTip';
 import AddButtonWithModal from '../components/AddButtonWithModal';
+
 
 class HomeScreen extends Component {
   static navigationOptions = {
@@ -14,32 +18,6 @@ class HomeScreen extends Component {
 
   state = {
     refreshing: false,
-    phrazes: [
-      {
-        phraze: 'Ban may tuoi va dang lam gi',
-        translated: "What's your age and your job?",
-        key: '6',
-        public: true,
-        phrazed: false,
-        favorite: true
-      },
-      {
-        phraze: 'Ban thich MERN Stack hay khong?',
-        translated: 'Do you have any experiences in MERN Stack?',
-        key: '7',
-        public: false,
-        phrazed: true,
-        favorite: true
-      },
-      {
-        phraze: 'Toi dang xem anime Attack on Titan',
-        translated: 'I am watching Attack on Titan anime.',
-        key: '8',
-        public: false,
-        phrazed: true,
-        favorite: false
-      }
-    ],
     page: 1,
     showTip: true
   };
@@ -64,29 +42,8 @@ class HomeScreen extends Component {
     }, 1000);
   };
 
-  onPressCheckBox = (key, opt) => {
-    const newPhrazes = this.state.phrazes.map(el => {
-      if (el.key === key) {
-        switch (opt) {
-          case 'public':
-            el.public = !el.public;
-            return el;
-          case 'phrazed':
-            el.phrazed = !el.phrazed;
-            return el;
-          case 'favorite':
-            el.favorite = !el.favorite;
-            return el;
-        }
-      }
-      return el;
-    });
-
-    this.setState({ phrazes: newPhrazes });
-  };
-
   renderItem = ({ item }) => {
-    return <Phraze item={item} onPressCheckBox={this.onPressCheckBox} />;
+    return <Phraze item={item} onPressCheckBox={this.props.onCheckBoxPhraze} />;
   };
 
   render() {
@@ -94,16 +51,18 @@ class HomeScreen extends Component {
       <PhrazeTip onPressCancel={() => this.setState({ showTip: false })} />
     ) : null;
 
+    const { navigation, phrazes } = this.props
+
     return (
       <View style={styles.container}>
         {phrazeTip}
         <FlatList
-          refreshing={this.state.refreshing}
-          onRefresh={this.fetchData}
-          data={this.state.phrazes}
+          // refreshing={this.state.refreshing}
+          // onRefresh={this.fetchData}
+          data={phrazes}
           renderItem={this.renderItem}
         />
-        <AddButtonWithModal navigation={this.props.navigation} />
+        <AddButtonWithModal navigation={navigation} />
       </View>
     );
   }
@@ -117,4 +76,13 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HomeScreen;
+const mapStateToProps = (state) => ({
+  phrazes: state.phraze.phrazes,
+})
+
+const mapDispatchToProps = dispatch => ({
+  onPhrazeAdded: phraze => dispatch(actions.addPhraze(phraze)),
+  onCheckBoxPhraze: (key, opt) => dispatch(actions.checkBoxPhraze(key, opt))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
