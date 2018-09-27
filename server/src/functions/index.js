@@ -1,7 +1,7 @@
 import * as funcs from "firebase-functions";
 import express from "express";
 import config from "./config";
-import schema from "./graphql/data/schema";
+import typeDefs from "./graphql/data/typeDefs";
 import resolvers from "./graphql/data/resolvers";
 import { ApolloServer } from "apollo-server-express";
 
@@ -10,7 +10,7 @@ config();
 const expressApp = express();
 
 const server = new ApolloServer({
-  typeDefs: schema,
+  typeDefs,
   resolvers
 });
 

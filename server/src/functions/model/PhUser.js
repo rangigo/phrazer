@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
-const phUserSchema = new Schema({
+export const phUserSchema = new Schema({
   fullName: {
     type: String,
     required: true
