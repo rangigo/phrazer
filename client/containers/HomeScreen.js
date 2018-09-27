@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-
 import { View, StyleSheet, FlatList } from 'react-native';
 import { Icon } from 'react-native-elements';
-import Text from '../components/MyText';
 import { newPhrazes } from './data';
-import { ActionSheetCustom as ActionSheet } from 'react-native-actionsheet';
 import Phraze from '../components/Phraze';
-import NewPhrazeOption from '../components/NewPhrazeOption';
+import PhrazeTip from '../components/PhrazeTip';
 
 class HomeScreen extends Component {
   static navigationOptions = {
@@ -91,36 +88,10 @@ class HomeScreen extends Component {
     return <Phraze item={item} onPressCheckBox={this.onPressCheckBox} />;
   };
 
-  NewPhrazeOptions = [
-    { title: 'Add new phraze', icon: 'translate' },
-    { title: 'Add new category', icon: 'list' },
-    { title: 'Add new library', icon: 'local-library' }
-  ];
-
   render() {
-    const { navigation } = this.props;
-
+    console.log('props', this.props);
     const phrazeTip = this.state.showTip ? (
-      <View style={styles.phrazeTip}>
-        <View style={{ flex: 0.2, paddingHorizontal: 10 }}>
-          <Icon name="check-box" color="white" />
-        </View>
-        <View
-          style={{
-            flex: 0.7,
-            paddingHorizontal: 10
-          }}
-        >
-          <Text>Tap a select box if you have learned the phraze.</Text>
-        </View>
-        <View style={{ flex: 0.1, paddingHorizontal: 10 }}>
-          <Icon
-            name="cancel"
-            color="#848484"
-            onPress={() => this.setState({ showTip: false })}
-          />
-        </View>
-      </View>
+      <PhrazeTip onPressCancel={() => this.setState({ showTip: false })} />
     ) : null;
 
     return (
@@ -132,41 +103,6 @@ class HomeScreen extends Component {
           data={this.state.phrazes}
           renderItem={this.renderItem}
         />
-        <Icon
-          name="add"
-          containerStyle={styles.addButton}
-          onPress={() => this.ActionSheet.show()}
-          color="#33AAAA"
-          reverse
-          raised
-        />
-        <ActionSheet
-          ref={o => (this.ActionSheet = o)}
-          title={
-            <Text style={{ color: '#727272', fontSize: 18 }}>
-              Choose option
-            </Text>
-          }
-          options={this.NewPhrazeOptions.map(el => (
-            <NewPhrazeOption title={el.title} icon={el.icon} />
-          )).concat(<Text>Cancel</Text>)}
-          cancelButtonIndex={3}
-          onPress={index => {
-            switch (index) {
-              case 0:
-                navigation.navigate('NewPhrazeScreen');
-                break;
-              case 1:
-                navigation.navigate('NewPhrazeScreen');
-                break;
-              case 2:
-                navigation.navigate('NewPhrazeScreen');
-                break;
-            }
-          }}
-        />
-
-        {/* <Text onPress={() => navigation.navigate('LoginScreen')}>go back</Text> */}
       </View>
     );
   }
@@ -177,17 +113,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
     justifyContent: 'center'
-  },
-  phrazeTip: {
-    paddingVertical: 10,
-    backgroundColor: '#D7D7D7',
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  addButton: {
-    position: 'absolute',
-    bottom: 15,
-    right: 15
   }
 });
 
