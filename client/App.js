@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import {
@@ -17,6 +17,7 @@ import DrawerContainer from './components/DrawerContainer';
 import ChatScreen from './containers/ChatScreen';
 import FeedScreen from './containers/FeedScreen';
 import NewPhrazeScreen from './containers/NewPhrazeScreen';
+import WithAddButton from './hocs/WithAddButton';
 
 Expo.Font.loadAsync({
   Roboto: require('./fonts/Roboto/Roboto-Regular.ttf')
@@ -24,9 +25,9 @@ Expo.Font.loadAsync({
 
 const CategoriesDrawer = createDrawerNavigator(
   {
-    Home: HomeScreen,
-    Conversation: ChatScreen,
-    Feed: FeedScreen
+    Home: WithAddButton(HomeScreen),
+    Conversation: WithAddButton(ChatScreen),
+    Feed: WithAddButton(FeedScreen)
   },
   {
     contentOptions: {
