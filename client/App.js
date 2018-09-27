@@ -4,7 +4,7 @@ import { createStore } from 'redux';
 import {
   createSwitchNavigator,
   createStackNavigator,
-  createDrawerNavigator
+  createDrawerNavigator,
 } from 'react-navigation';
 import createDismissableStackNavigator from './helpers/createDissmissableStackNavigator';
 import { Icon } from 'react-native-elements';
@@ -17,7 +17,6 @@ import DrawerContainer from './components/DrawerContainer';
 import ChatScreen from './containers/ChatScreen';
 import FeedScreen from './containers/FeedScreen';
 import NewPhrazeScreen from './containers/NewPhrazeScreen';
-import WithAddButton from './hocs/WithAddButton';
 
 Expo.Font.loadAsync({
   Roboto: require('./fonts/Roboto/Roboto-Regular.ttf')
@@ -25,9 +24,9 @@ Expo.Font.loadAsync({
 
 const CategoriesDrawer = createDrawerNavigator(
   {
-    Home: WithAddButton(HomeScreen),
-    Conversation: WithAddButton(ChatScreen),
-    Feed: WithAddButton(FeedScreen)
+    Home: HomeScreen,
+    Conversation: ChatScreen,
+    Feed: FeedScreen
   },
   {
     contentOptions: {
@@ -35,8 +34,6 @@ const CategoriesDrawer = createDrawerNavigator(
         fontFamily: 'Roboto'
       },
       activeTintColor: '#4AA9A8',
-      activeBackgroundColor: 'white',
-      inactiveBackgroundColor: 'white',
       inactiveTintColor: '#727272'
     },
     contentComponent: DrawerContainer

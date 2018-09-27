@@ -4,6 +4,7 @@ import { Icon } from 'react-native-elements';
 import { newPhrazes } from './data';
 import Phraze from '../components/Phraze';
 import PhrazeTip from '../components/PhrazeTip';
+import AddButtonWithModal from '../components/AddButtonWithModal';
 
 class HomeScreen extends Component {
   static navigationOptions = {
@@ -89,7 +90,6 @@ class HomeScreen extends Component {
   };
 
   render() {
-    console.log('props', this.props);
     const phrazeTip = this.state.showTip ? (
       <PhrazeTip onPressCancel={() => this.setState({ showTip: false })} />
     ) : null;
@@ -103,6 +103,7 @@ class HomeScreen extends Component {
           data={this.state.phrazes}
           renderItem={this.renderItem}
         />
+        <AddButtonWithModal navigation={this.props.navigation} />
       </View>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { ScrollView, View, StyleSheet } from 'react-native';
 import Text from '../components/MyText';
 import { Icon, CheckBox } from 'react-native-elements';
 import { Dropdown } from 'react-native-material-dropdown';
@@ -37,11 +37,8 @@ class NewPhrazeScreen extends Component {
   render() {
     const { category, phraze, translation, isPublic } = this.state;
 
-    console.log('Category', category);
-    console.log('Phraze', phraze);
-
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Dropdown
           label="Categories"
           data={data}
@@ -87,7 +84,7 @@ class NewPhrazeScreen extends Component {
           checked={isPublic}
           onPress={() => this.setState({ isPublic: !isPublic })}
         />
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -96,9 +93,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    padding: 15
+    padding: 15,
   },
   recordContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 15
