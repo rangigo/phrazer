@@ -1,6 +1,6 @@
 import * as actionTypes from "../actions/actionTypes";
 
-const initFeed = [
+const feedInit = [
   {
     native: "How are you?",
     foreign: "Jak se máš?",
@@ -18,7 +18,7 @@ const initFeed = [
   }
 ];
 
-export default (state = initFeed, action) => {
+export default (state = feedInit, action) => {
   switch (action.type) {
     case "actionTy":
       break;

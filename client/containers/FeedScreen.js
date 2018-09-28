@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, StyleSheet, FlatList } from "react-native";
 
+import * as actions from "../actions";
 import FeedItem from "../components/FeedItem";
 
 class FeedScreen extends Component {
@@ -11,7 +12,12 @@ class FeedScreen extends Component {
   };
 
   renderItem = ({ item }) => {
-    return <FeedItem item={item} onPressCheckBox={this.onPressCheckBox} />;
+    return (
+      <FeedItem
+        item={item}
+        onImportButtonPressed={this.props.onImportButtonPressed}
+      />
+    );
   };
 
   render() {
@@ -32,7 +38,8 @@ class FeedScreen extends Component {
 
 const styles = StyleSheet.create({
   listFooter: {
-    height: 100
+    height: 100,
+    backgroundColor: "white"
   },
   container: {
     flex: 1,
@@ -56,7 +63,9 @@ const mapStateToProps = ({ feed }) => ({
   feed
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  onImportButtonPressed: phraze => dispatch(actions.addPhraze(phraze))
+});
 
 export default connect(
   mapStateToProps,
