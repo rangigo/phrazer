@@ -3,9 +3,8 @@ import { View, StyleSheet, FlatList } from "react-native";
 import { Icon } from "react-native-elements";
 import Text from "../components/MyText";
 import { newPhrazes } from "./data";
-import { ActionSheetCustom as ActionSheet } from "react-native-actionsheet";
 import FeedItem from "../components/FeedItem";
-import NewPhrazeOption from "../components/NewPhrazeOption";
+import AddButtonWithModal from "../components/AddButtonWithModal";
 
 class FeedScreen extends Component {
   static navigationOptions = {
@@ -86,39 +85,7 @@ class FeedScreen extends Component {
           renderItem={this.renderItem}
           ListFooterComponent={() => <View style={styles.listFooter} />}
         />
-        <Icon
-          name="add"
-          containerStyle={styles.addButton}
-          onPress={() => this.ActionSheet.show()}
-          color="#33AAAA"
-          reverse
-          raised
-        />
-        <ActionSheet
-          ref={o => (this.ActionSheet = o)}
-          title={
-            <Text style={{ color: "#727272", fontSize: 18 }}>
-              Choose option
-            </Text>
-          }
-          options={this.NewPhrazeOptions.map(el => (
-            <NewPhrazeOption title={el.title} icon={el.icon} />
-          )).concat(<Text>Cancel</Text>)}
-          cancelButtonIndex={3}
-          onPress={index => {
-            switch (index) {
-              case 0:
-                navigation.navigate("NewPhrazeScreen");
-                break;
-              case 1:
-                navigation.navigate("NewPhrazeScreen");
-                break;
-              case 2:
-                navigation.navigate("NewPhrazeScreen");
-                break;
-            }
-          }}
-        />
+        <AddButtonWithModal navigation={navigation} />
       </View>
     );
   }
