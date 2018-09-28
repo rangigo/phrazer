@@ -7,11 +7,6 @@ import FeedItem from "../components/FeedItem";
 import AddButtonWithModal from "../components/AddButtonWithModal";
 
 class FeedScreen extends Component {
-  static navigationOptions = {
-    drawerLabel: "Feed",
-    drawerIcon: ({ tintColor }) => <Icon name="public" color={tintColor} />
-  };
-
   state = {
     refreshing: false,
     phrazes: [
@@ -42,26 +37,6 @@ class FeedScreen extends Component {
     ],
     page: 1,
     showTip: true
-  };
-
-  componentDidMount() {
-    // this.fetchData();
-  }
-
-  fetchData = async () => {
-    this.setState({ refreshing: true });
-
-    setTimeout(() => {
-      if (this.state.page === 1) {
-        this.setState({
-          phrazes: this.state.phrazes.concat(newPhrazes),
-          page: 2
-        });
-      }
-      this.setState({
-        refreshing: false
-      });
-    }, 1000);
   };
 
   renderItem = ({ item }) => {
