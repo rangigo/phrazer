@@ -1,3 +1,1 @@
-export const demoAction = () => ({
-  type: "DEMO"
-});
+export { addPhraze, checkBoxPhraze } from './phrazeActions';

@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import {
   createSwitchNavigator,
   createStackNavigator,
-  createDrawerNavigator
+  createDrawerNavigator,
 } from 'react-navigation';
 import createDismissableStackNavigator from './helpers/createDissmissableStackNavigator';
 import { Icon } from 'react-native-elements';
@@ -34,8 +34,6 @@ const CategoriesDrawer = createDrawerNavigator(
         fontFamily: 'Roboto'
       },
       activeTintColor: '#4AA9A8',
-      activeBackgroundColor: 'white',
-      inactiveBackgroundColor: 'white',
       inactiveTintColor: '#727272'
     },
     contentComponent: DrawerContainer
