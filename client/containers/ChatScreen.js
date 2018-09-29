@@ -3,6 +3,29 @@ import { View, StyleSheet, FlatList } from "react-native";
 import { Icon } from "react-native-elements";
 import Text from "../components/MyText";
 
+const messagesInit = [
+  {
+    id: 1,
+    name: "Leanne Graham",
+    email: "Sincere@april.biz"
+  },
+  {
+    id: 2,
+    name: "Ervin Howell",
+    email: "Shanna@melissa.tv"
+  },
+  {
+    id: 3,
+    name: "Clementine Bauch",
+    email: "Nathan@yesenia.net"
+  },
+  {
+    id: 4,
+    name: "Patricia Lebsack",
+    email: "Julianne.OConner@kory.org"
+  }
+];
+
 class ChatScreen extends Component {
   static navigationOptions = {
     drawerLabel: "Conversation",
@@ -12,19 +35,8 @@ class ChatScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: []
+      messages: messagesInit
     };
-  }
-
-  componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState({ messages: responseJson });
-      })
-      .catch(error => {
-        console.error(error);
-      });
   }
 
   render() {
@@ -65,6 +77,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#ccc"
   },
   container: {
+    height: "100%",
     backgroundColor: "white"
   },
   col1: {
