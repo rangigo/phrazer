@@ -9,11 +9,30 @@ class ChatScreen extends Component {
     drawerIcon: ({ tintColor }) => <Icon name="chat" color={tintColor} />,
   };
 
+  state = {
+    refreshing: false,
+    chats: [
+      {
+        name: 'Martynas Gudaitis',
+        message: "Are you planing to go to the party tomorrow?",
+        key: '90',
+      }
+    ]
+  };
+
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Chat screen</Text>
+        <View style={styles.chatContainer}>
+          <View style={styles.col1}>
+            <Icon name="person" color="grey" />
+          </View>
+          <View style={styles.col2}>
+            <Text>User ghkjghkjhk</Text>
+            <Text>User message</Text>
+          </View>
+        </View>
       </View>
     )
   }
@@ -24,6 +43,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  chatContainer: {
+    paddingVertical: 23,
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc'
+  },
+  col1: {
+    flex: 0.2,
+    paddingHorizontal: 10,
+    alignItems: 'center'
+  },
+  col2: {
+    flex: 0.8,
+    paddingHorizontal: 10
   }
 })
 
