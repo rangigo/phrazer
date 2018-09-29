@@ -11,17 +11,25 @@ class ChatScreen extends Component {
 
   state = {
     refreshing: false,
-    chats: [
-      {
-        name: 'Martynas Gudaitis',
-        message: "Are you planing to go to the party tomorrow?",
-        key: '90',
-      }
-    ]
+    comments: []
   };
+
+  componentWillMount(){
+    fetch(https://jsonplaceholder.typicode.com/comments)
+    .then((response) => response.json())
+    .then((responseJson) => {
+      this.setState({
+        comments: responseJson
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
 
 
   render() {
+    console.log(this.state.comments);
     return (
       <View style={styles.container}>
         <View style={styles.chatContainer}>
@@ -29,8 +37,8 @@ class ChatScreen extends Component {
             <Icon name="person" color="grey" />
           </View>
           <View style={styles.col2}>
-            <Text>User ghkjghkjhk</Text>
-            <Text>User message</Text>
+            <Text>{this.state.chats.name}</Text>
+            <Text>{this.state.chats.message}</Text>
           </View>
         </View>
       </View>
@@ -45,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   chatContainer: {
-    paddingVertical: 23,
+    paddingVertical: 23,  
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: '#ccc'
