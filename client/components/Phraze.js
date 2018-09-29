@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { CheckBox, Icon } from 'react-native-elements';
 import Text from './MyText';
 
-const Phraze = ({ item, onPressCheckBox }) => {
+const Phraze = ({ item, onPressCheckBox, onPressPhraze }) => {
   return (
     <View style={styles.phrazeContainer}>
       <View style={styles.col1}>
@@ -27,7 +27,7 @@ const Phraze = ({ item, onPressCheckBox }) => {
         />
       </View>
       <View style={styles.col2}>
-        <Text>{item.phraze}</Text>
+        <Text onPress={() => onPressPhraze(item)}>{item.phraze}</Text>
         <Text style={{ color: '#B2B2B2' }}>{item.translated}</Text>
       </View>
       <View style={styles.col3}>

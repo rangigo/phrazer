@@ -43,7 +43,11 @@ class HomeScreen extends Component {
   };
 
   renderItem = ({ item }) => {
-    return <Phraze item={item} onPressCheckBox={this.props.onCheckBoxPhraze} />;
+    return <Phraze item={item} onPressCheckBox={this.props.onCheckBoxPhraze} onPressPhraze={this.openPhrazeDetail} />;
+  };
+
+  openPhrazeDetail = (item) => {
+    this.props.navigation.navigate("PhrazeDetailScreen",{item});
   };
 
   render() {
