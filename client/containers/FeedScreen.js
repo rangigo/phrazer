@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#F2F2F2",
     justifyContent: "center"
   },
   phrazeTip: {

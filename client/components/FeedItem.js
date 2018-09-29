@@ -2,6 +2,14 @@ import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { Icon } from "react-native-elements";
 import Text from "./MyText";
+import {
+  Card,
+  CardTitle,
+  CardContent,
+  CardAction,
+  CardButton,
+  CardImage
+} from "react-native-material-cards";
 
 class FeedItem extends Component {
   constructor(props) {
@@ -33,26 +41,55 @@ class FeedItem extends Component {
     const { item } = this.props;
     const { added } = this.state;
 
-    const mainActionIcon = added ? <Icon name="done" /> : <Icon name="add" />;
+    const mainActionIcon = added ? "Added" : "Add";
 
-    return (
-      <View style={styles.phrazeContainer}>
-        <View style={styles.col1} onTouchEnd={this.onMainAction}>
-          {mainActionIcon}
-        </View>
-        <View style={styles.col2}>
-          <Text>{item.native}</Text>
-          <Text style={{ color: "#B2B2B2" }}>{item.foreign}</Text>
-        </View>
-        <View style={styles.col3}>
-          <Icon name="more-horiz" />
-        </View>
-      </View>
-    );
+    if (item.foreign) {
+      return (
+        <Card>
+          <CardTitle
+            subtitle={item.author.fullName}
+            title={item.native}
+            subtitleAbove={true}
+          />
+          <CardContent text={item.foreign} />
+          <CardAction separator={false} inColumn={false} style={styles.actions}>
+            <CardButton onPress={() => {}} title="Translate" color="#2B7A78" />
+            <CardButton
+              onPress={this.onMainAction}
+              title={mainActionIcon}
+              color="#2B7A78"
+            />
+          </CardAction>
+        </Card>
+      );
+    } else {
+      return (
+        <Card>
+          <CardTitle
+            subtitle={item.author.fullName}
+            title={item.native}
+            subtitleAbove={true}
+          />
+          <CardAction separator={false} inColumn={false} style={styles.actions}>
+            <CardButton onPress={() => {}} title="Translate" color="#2B7A78" />
+            <CardButton
+              onPress={this.onMainAction}
+              title={mainActionIcon}
+              color="#2B7A78"
+            />
+          </CardAction>
+        </Card>
+      );
+    }
   }
 }
 
 const styles = StyleSheet.create({
+  actions: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingRight: 10
+  },
   phrazeContainer: {
     paddingVertical: 0,
     flexDirection: "row",
