@@ -1,1 +1,1 @@
-export { addPhraze, checkBoxPhraze } from './phrazeActions';
+export { addPhraze, checkBoxPhraze, editPhrase } from "./phrazeActions";
