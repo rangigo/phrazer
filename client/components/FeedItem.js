@@ -42,45 +42,32 @@ class FeedItem extends Component {
     const { added } = this.state;
 
     const mainActionIcon = added ? "Added" : "Add";
+    const addButtonColor = added ? "#A9A9A9" : "#2B7A78";
 
-    if (item.foreign) {
-      return (
-        <Card>
-          <CardTitle
-            subtitle={item.author.fullName}
-            title={item.native}
-            subtitleAbove={true}
+    const foreign = item.foreign ? (
+      <CardContent text={item.foreign} />
+    ) : (
+      <View />
+    );
+
+    return (
+      <Card>
+        <CardTitle
+          subtitle={item.author.fullName}
+          title={item.native}
+          subtitleAbove={true}
+        />
+        {foreign}
+        <CardAction separator={false} inColumn={false} style={styles.actions}>
+          <CardButton onPress={() => {}} title="Translate" color="#2B7A78" />
+          <CardButton
+            onPress={this.onMainAction}
+            title={mainActionIcon}
+            color={addButtonColor}
           />
-          <CardContent text={item.foreign} />
-          <CardAction separator={false} inColumn={false} style={styles.actions}>
-            <CardButton onPress={() => {}} title="Translate" color="#2B7A78" />
-            <CardButton
-              onPress={this.onMainAction}
-              title={mainActionIcon}
-              color="#2B7A78"
-            />
-          </CardAction>
-        </Card>
-      );
-    } else {
-      return (
-        <Card>
-          <CardTitle
-            subtitle={item.author.fullName}
-            title={item.native}
-            subtitleAbove={true}
-          />
-          <CardAction separator={false} inColumn={false} style={styles.actions}>
-            <CardButton onPress={() => {}} title="Translate" color="#2B7A78" />
-            <CardButton
-              onPress={this.onMainAction}
-              title={mainActionIcon}
-              color="#2B7A78"
-            />
-          </CardAction>
-        </Card>
-      );
-    }
+        </CardAction>
+      </Card>
+    );
   }
 }
 
