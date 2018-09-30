@@ -29,7 +29,6 @@ class FeedScreen extends Component {
           // onRefresh={this.fetchData}
           data={feed}
           renderItem={this.renderItem}
-          ListFooterComponent={() => <View style={styles.listFooter} />}
         />
       </View>
     );
@@ -37,10 +36,6 @@ class FeedScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  listFooter: {
-    height: 100,
-    backgroundColor: "white"
-  },
   container: {
     flex: 1,
     backgroundColor: "#F2F2F2",
