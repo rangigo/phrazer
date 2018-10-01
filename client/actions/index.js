@@ -1,1 +1,2 @@
-export { addPhraze, checkBoxPhraze } from './phrazeActions';
+export * from "./phrazeActions";
+export * from "./feedActions";
