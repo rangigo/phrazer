@@ -41,8 +41,8 @@ class FeedItem extends Component {
     const { item } = this.props;
     const { added } = this.state;
 
-    const mainActionIcon = added ? "Added" : "Add";
-    const addButtonColor = added ? "#A9A9A9" : "#2B7A78";
+    const addButtonStyle = added ? styles.addButtonDisabled : styles.addButton;
+    const addButtonTitle = added ? "Added" : "Add";
 
     const foreign = item.foreign ? (
       <CardContent text={item.foreign} />
@@ -62,8 +62,9 @@ class FeedItem extends Component {
           <CardButton onPress={() => {}} title="Translate" color="#2B7A78" />
           <CardButton
             onPress={this.onMainAction}
-            title={mainActionIcon}
-            color={addButtonColor}
+            title={addButtonTitle}
+            color="white"
+            style={addButtonStyle}
           />
         </CardAction>
       </Card>
@@ -72,6 +73,12 @@ class FeedItem extends Component {
 }
 
 const styles = StyleSheet.create({
+  addButton: {
+    backgroundColor: "#FF5E00"
+  },
+  addButtonDisabled: {
+    backgroundColor: "#CCC"
+  },
   actions: {
     flexDirection: "row",
     justifyContent: "space-between",
