@@ -9,8 +9,8 @@ const initState = {
       phraze: "How are you doing?",
       translated: "Mitä kuuluu?",
       public: false,
-      phrazed: true,
-      favorite: false
+      phrazed: false,
+      favorite: true
     },
     {
       key: "2",
@@ -20,7 +20,7 @@ const initState = {
       translated: "Mistä olet kotoisin?",
       public: false,
       phrazed: true,
-      favorite: false
+      favorite: true
     },
     {
       key: "3",
@@ -28,8 +28,8 @@ const initState = {
       category: "meeting",
       phraze: "What is your name?",
       translated: "Mikä on sinun nimesi?",
-      public: false,
-      phrazed: true,
+      public: true,
+      phrazed: false,
       favorite: false
     },
     {
@@ -39,7 +39,7 @@ const initState = {
       phraze: "Do you seek english?\n",
       translated: "Puhutko englantia?",
       public: false,
-      phrazed: true,
+      phrazed: false,
       favorite: false
     },
     {
@@ -48,9 +48,9 @@ const initState = {
       category: "meeting",
       phraze: "It was nice to meet you",
       translated: "Oli kiva tavata",
-      public: false,
+      public: true,
       phrazed: true,
-      favorite: false
+      favorite: true
     },
     {
       key: "9",
