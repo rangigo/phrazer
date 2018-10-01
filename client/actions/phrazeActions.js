@@ -1,12 +1,17 @@
-import * as actionTypes from './actionTypes'
+import * as actionTypes from "./actionTypes";
 
-export const addPhraze = (payload) => ({
+export const addPhraze = payload => ({
   type: actionTypes.ADD_PHRAZE,
-  payload,
-})
+  payload
+});
+
+export const editPhrase = payload => ({
+  type: actionTypes.EDIT_PHRASE,
+  payload
+});
 
 export const checkBoxPhraze = (key, opt) => ({
   type: actionTypes.CHECK_BOX_PHRAZE,
   key,
-  opt,
-})
+  opt
+});

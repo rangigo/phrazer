@@ -11,6 +11,7 @@ import BottomTabNavigator from "./navigation/BottomTabNavigator";
 
 import LoginScreen from "./components/LoginScreen";
 import NewPhrazeScreen from "./containers/NewPhrazeScreen";
+import PhrazeDetailScreen from "./containers/PhrazeDetailScreen";
 
 Expo.Font.loadAsync({
   Roboto: require("./fonts/Roboto/Roboto-Regular.ttf")
@@ -18,7 +19,8 @@ Expo.Font.loadAsync({
 
 const NewPhrazeStack = createDismissableStackNavigator(
   {
-    NewPhrazeScreen
+    NewPhrazeScreen,
+    PhrazeDetailScreen
   },
   {
     navigationOptions: {
