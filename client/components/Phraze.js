@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { CheckBox, Icon } from 'react-native-elements';
-import Text from './MyText';
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { CheckBox, Icon } from "react-native-elements";
+import Text from "./MyText";
 
 const Phraze = ({ item, onPressCheckBox, onPressPhraze }) => {
   return (
@@ -14,7 +14,7 @@ const Phraze = ({ item, onPressCheckBox, onPressPhraze }) => {
           uncheckedIcon="people"
           checkedColor="#33AAAA"
           checked={item.public}
-          onPress={() => onPressCheckBox(item.key, 'public')}
+          onPress={() => onPressCheckBox(item.key, "public")}
         />
         <CheckBox
           containerStyle={styles.checkBoxContainer}
@@ -23,18 +23,18 @@ const Phraze = ({ item, onPressCheckBox, onPressPhraze }) => {
           uncheckedIcon="check-box-outline-blank"
           checkedColor="#33AAAA"
           checked={item.phrazed}
-          onPress={() => onPressCheckBox(item.key, 'phrazed')}
+          onPress={() => onPressCheckBox(item.key, "phrazed")}
         />
       </View>
       <View style={styles.col2}>
-        <Text onPress={() => onPressPhraze(item)}>{item.phraze}</Text>
-        <Text style={{ color: '#B2B2B2' }}>{item.translated}</Text>
+        <Text>{item.phraze}</Text>
+        <Text style={{ color: "#B2B2B2" }}>{item.translated}</Text>
       </View>
       <View style={styles.col3}>
         <Icon name="volume-mute" color="#ccc" size={30} />
       </View>
       <View style={styles.col4}>
-        <Icon name="more-horiz" />
+        <Icon name="create" color="#ccc" onPress={() => onPressPhraze(item)} />
         <CheckBox
           containerStyle={styles.checkBoxContainer}
           iconType="material"
@@ -42,7 +42,7 @@ const Phraze = ({ item, onPressCheckBox, onPressPhraze }) => {
           uncheckedIcon="star-border"
           checkedColor="#F6BF26"
           checked={item.favorite}
-          onPress={() => onPressCheckBox(item.key, 'favorite')}
+          onPress={() => onPressCheckBox(item.key, "favorite")}
         />
       </View>
     </View>
@@ -52,14 +52,14 @@ const Phraze = ({ item, onPressCheckBox, onPressPhraze }) => {
 const styles = StyleSheet.create({
   phrazeContainer: {
     paddingVertical: 23,
-    flexDirection: 'row',
+    flexDirection: "row",
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc'
+    borderBottomColor: "#ccc"
   },
   col1: {
     flex: 0.2,
     paddingHorizontal: 10,
-    alignItems: 'center'
+    alignItems: "center"
   },
   col2: {
     flex: 0.6,
@@ -72,11 +72,11 @@ const styles = StyleSheet.create({
   col4: {
     flex: 0.1,
     paddingHorizontal: 10,
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    justifyContent: "space-between",
+    alignItems: "center"
   },
   checkBoxContainer: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     borderWidth: 0,
     padding: 0,
     margin: 0,
