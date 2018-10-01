@@ -3,25 +3,61 @@ import * as actionTypes from "../actions/actionTypes";
 const initState = {
   phrazes: [
     {
-      phraze: "Ban may tuoi va dang lam gi",
-      translated: "What's your age and your job?",
-      key: "6",
-      public: true,
-      phrazed: false,
-      favorite: true
-    },
-    {
-      phraze: "Ban thich MERN Stack hay khong?",
-      translated: "Do you have any experiences in MERN Stack?",
-      key: "7",
+      key: "1",
+      library: "finnish",
+      category: "meeting",
+      phraze: "How are you doing?",
+      translated: "Mitä kuuluu?",
       public: false,
       phrazed: true,
-      favorite: true
+      favorite: false
     },
     {
-      phraze: "Toi dang xem anime Attack on Titan",
-      translated: "I am watching Attack on Titan anime.",
-      key: "8",
+      key: "2",
+      library: "finnish",
+      category: "meeting",
+      phraze: "Where are you from?",
+      translated: "Mistä olet kotoisin?",
+      public: false,
+      phrazed: true,
+      favorite: false
+    },
+    {
+      key: "3",
+      library: "finnish",
+      category: "meeting",
+      phraze: "What is your name?",
+      translated: "Mikä on sinun nimesi?",
+      public: false,
+      phrazed: true,
+      favorite: false
+    },
+    {
+      key: "4",
+      library: "finnish",
+      category: "meeting",
+      phraze: "Do you seek english?\n",
+      translated: "Puhutko englantia?",
+      public: false,
+      phrazed: true,
+      favorite: false
+    },
+    {
+      key: "5",
+      library: "finnish",
+      category: "meeting",
+      phraze: "It was nice to meet you",
+      translated: "Oli kiva tavata",
+      public: false,
+      phrazed: true,
+      favorite: false
+    },
+    {
+      key: "9",
+      library: "finnish",
+      category: "meeting",
+      phraze: "You are welcome",
+      translated: "Ole hyvä",
       public: false,
       phrazed: true,
       favorite: false
