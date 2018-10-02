@@ -7,9 +7,8 @@ import {
   CardTitle,
   CardContent,
   CardAction,
-  CardButton,
-  CardImage
-} from "react-native-material-cards";
+  CardButton
+} from "./../material-cards-custom";
 
 class FeedItem extends Component {
   constructor(props) {
@@ -41,8 +40,12 @@ class FeedItem extends Component {
     const { item } = this.props;
     const { added } = this.state;
 
-    const addButtonStyle = added ? styles.addButtonDisabled : styles.addButton;
+    const addButtonStyle =
+      added || !item.foreign ? styles.addButtonDisabled : styles.addButton;
     const addButtonTitle = added ? "Added" : "Add";
+
+    const translateButtonColor = item.foreign ? "#CCC" : "#2B7A78";
+    const translateButtonTitle = item.foreign ? "Translated" : "Translate";
 
     const foreign = item.foreign ? (
       <CardContent text={item.foreign} />
@@ -59,7 +62,11 @@ class FeedItem extends Component {
         />
         {foreign}
         <CardAction separator={false} inColumn={false} style={styles.actions}>
-          <CardButton onPress={() => {}} title="Translate" color="#2B7A78" />
+          <CardButton
+            onPress={() => {}}
+            title={translateButtonTitle}
+            color={translateButtonColor}
+          />
           <CardButton
             onPress={this.onMainAction}
             title={addButtonTitle}

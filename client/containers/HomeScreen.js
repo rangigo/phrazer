@@ -15,11 +15,17 @@ class HomeScreen extends Component {
   };
 
   renderItem = ({ item }) => {
-    return <Phraze item={item} onPressCheckBox={this.props.onCheckBoxPhraze} onPressPhraze={this.openPhrazeDetail} />;
+    return (
+      <Phraze
+        item={item}
+        onPressCheckBox={this.props.onCheckBoxPhraze}
+        onPressPhraze={this.openPhrazeDetail}
+      />
+    );
   };
 
-  openPhrazeDetail = (item) => {
-    this.props.navigation.navigate("PhrazeDetailScreen",{item});
+  openPhrazeDetail = item => {
+    this.props.navigation.navigate("PhrazeDetailScreen", { item });
   };
 
   render() {
@@ -37,6 +43,7 @@ class HomeScreen extends Component {
           // onRefresh={this.fetchData}
           data={phrazes}
           renderItem={this.renderItem}
+          ListFooterComponent={<View style={styles.footer} />}
         />
         <AddButtonWithModal navigation={navigation} />
       </View>
@@ -45,9 +52,12 @@ class HomeScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  footer: {
+    height: 90
+  },
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#F2F2F2",
     justifyContent: "center"
   }
 });
