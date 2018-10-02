@@ -9,9 +9,9 @@ const BasicStackWrapper = (
   routes,
 ) => {
   return createStackNavigator(routes, {
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: {
       title: title,
-      headerLeft: <Icon name={leftHeaderName} color="white" onPress={() => navigation.openDrawer() }/>,
+      headerLeft: <Icon name={leftHeaderName} color="white" />,
       headerRight: <Icon name={rightHeaderName} color="white" />,
       headerStyle: {
         backgroundColor: '#4AA9A8',
@@ -26,7 +26,7 @@ const BasicStackWrapper = (
         fontFamily: 'Roboto',
         color: 'white',
       },
-    }),
+    },
   });
 };
 
