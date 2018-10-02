@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { View, StyleSheet, FlatList } from 'react-native';
-import { Icon } from 'react-native-elements';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { View, StyleSheet, Text } from "react-native";
+import { Icon } from "react-native-elements";
 
-import * as actions from '../actions';
-import Phraze from '../components/Phraze';
-import PhrazeTip from '../components/PhrazeTip';
-import AddButtonWithModal from '../components/AddButtonWithModal';
-import FilterModal from '../components/FilterModal';
+import * as actions from "../actions";
+import Phraze from "../components/Phraze";
+import PhrazeTip from "../components/PhrazeTip";
+import AddButtonWithModal from "../components/AddButtonWithModal";
+import FilterModal from "../components/FilterModal";
+import PhSectionList from "../components/PhSectionList";
 
 class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -26,7 +27,7 @@ class HomeScreen extends Component {
     page: 1,
     showTip: true,
     showFilterModal: false,
-    category: 'Meeting'
+    category: "Meeting"
   };
 
   componentDidMount() {
@@ -74,8 +75,12 @@ class HomeScreen extends Component {
     );
   };
 
+  renderSectionHeader = ({ section: { title } }) => {
+    return <Text>{title}</Text>;
+  };
+
   openPhrazeDetail = item => {
-    this.props.navigation.navigate('PhrazeDetailScreen', { item });
+    this.props.navigation.navigate("PhrazeDetailScreen", { item });
   };
 
   render() {
@@ -89,11 +94,13 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         {phrazeTip}
-        <FlatList
+        <PhSectionList
           // refreshing={this.state.refreshing}
           // onRefresh={this.fetchData}
           data={phrazesByCategory}
+          groupBy={item => item.phraze.charAt(0)}
           renderItem={this.renderItem}
+          renderSectionHeader={this.renderSectionHeader}
           ListFooterComponent={<View style={styles.footer} />}
         />
         <FilterModal
@@ -115,8 +122,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#F2F2F2',
-    justifyContent: 'center'
+    backgroundColor: "#F2F2F2",
+    justifyContent: "center"
   }
 });
 
