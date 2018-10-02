@@ -1,29 +1,31 @@
 import React from 'react';
 import Modal from 'react-native-modal';
 import { View, StyleSheet } from 'react-native';
-import { CheckBox } from 'react-native-elements';
+import { CheckBox, Divider, Button } from 'react-native-elements';
 import Text from './MyText';
 
 const categories = [
-  { category: 'Work' },
-  { category: 'Study' },
-  { category: 'Hangout' },
+  { category: 'Meeting' },
+  { category: 'Greeting' },
+  { category: 'Hangout' }
 ];
 
 const FilterModal = ({
   showModal,
-  hideModal,
   checkedCategory,
   onPressCategory,
+  onGetPhrazesByCategory,
+  onCancelModal
 }) => {
   return (
     <Modal
       isVisible={showModal}
-      onBackdropPress={hideModal}
+      onBackdropPress={onCancelModal}
       style={styles.modalContainer}
     >
       <View style={styles.modalContent}>
         <Text style={styles.modalTitle}>Categories</Text>
+        <Divider style={{ backgroundColor: '#ccc' }} />
         {categories.map(el => (
           <CheckBox
             title={el.category}
@@ -34,9 +36,26 @@ const FilterModal = ({
             checked={el.category === checkedCategory}
             containerStyle={styles.radioButtonContainer}
             onPress={() => onPressCategory(el.category)}
-            textStyle={{ color: '#727272' }}
+            textStyle={{
+              color: el.category === checkedCategory ? '#33AAAA' : '#bfbfbf'
+            }}
           />
         ))}
+        <Divider style={{ backgroundColor: '#ccc' }} />
+        <View style={styles.modalFooter}>
+          <Button
+            title="CANCEL"
+            buttonStyle={styles.button}
+            color="#33AAAA"
+            onPress={onCancelModal}
+          />
+          <Button
+            title="ACCEPT"
+            buttonStyle={styles.button}
+            color="#33AAAA"
+            onPress={onGetPhrazesByCategory}
+          />
+        </View>
       </View>
     </Modal>
   );
@@ -45,24 +64,30 @@ const FilterModal = ({
 const styles = StyleSheet.create({
   radioButtonContainer: {
     backgroundColor: 'white',
-    borderWidth: 0,
+    borderWidth: 0
   },
   modalContainer: {
-    marginHorizontal: 80,
+    marginHorizontal: 50
   },
   modalContent: {
     backgroundColor: 'white',
-    paddingVertical: 10,
     borderRadius: 4,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
+    borderColor: 'rgba(0, 0, 0, 0.1)'
   },
   modalTitle: {
     color: '#727272',
     padding: 15,
-    borderBottomWidth: 2,
-    borderColor: '#ccc',
-    fontSize: 20,
+    fontSize: 20
   },
+  modalFooter: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingVertical: 5
+  },
+  button: {
+    backgroundColor: 'transparent'
+  }
 });
 
 export default FilterModal;
