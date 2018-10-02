@@ -18,7 +18,7 @@ class HomeScreen extends Component {
         underlayColor="transparent"
         onPress={() => navigation.state.params.handleFilter()}
       />
-    ),
+    )
   });
 
   state = {
@@ -26,12 +26,17 @@ class HomeScreen extends Component {
     page: 1,
     showTip: true,
     showFilterModal: false,
-    category: 'Work',
+    category: 'Meeting'
   };
 
   componentDidMount() {
     this.props.navigation.setParams({ handleFilter: this.onPressFilter });
+    this.props.onGetPhrazesByCategory(this.state.category);
   }
+
+  /** Handle modal functions
+   * Start
+   */
 
   onPressFilter = () => {
     this.setState({ showFilterModal: true });
@@ -44,6 +49,20 @@ class HomeScreen extends Component {
   onPressCategory = category => {
     this.setState({ category });
   };
+
+  onGetPhrazesByCategory = () => {
+    this.hideFilterModal();
+    this.props.onGetPhrazesByCategory(this.state.category);
+  };
+
+  onCancelModal = () => {
+    this.hideFilterModal();
+    this.setState({ category: this.props.selectedCategory });
+  };
+
+  /** Handle modal functions
+   * End
+   */
 
   renderItem = ({ item }) => {
     return (
@@ -60,7 +79,7 @@ class HomeScreen extends Component {
   };
 
   render() {
-    const { navigation, phrazes } = this.props;
+    const { navigation, phrazesByCategory } = this.props;
     const { showFilterModal, showTip, category } = this.state;
 
     const phrazeTip = showTip ? (
@@ -73,15 +92,16 @@ class HomeScreen extends Component {
         <FlatList
           // refreshing={this.state.refreshing}
           // onRefresh={this.fetchData}
-          data={phrazes}
+          data={phrazesByCategory}
           renderItem={this.renderItem}
           ListFooterComponent={<View style={styles.footer} />}
         />
         <FilterModal
           showModal={showFilterModal}
-          hideModal={this.hideFilterModal}
           checkedCategory={category}
           onPressCategory={this.onPressCategory}
+          onGetPhrazesByCategory={this.onGetPhrazesByCategory}
+          onCancelModal={this.onCancelModal}
         />
         <AddButtonWithModal navigation={navigation} />
       </View>
@@ -91,25 +111,29 @@ class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
   footer: {
-    height: 90,
+    height: 90
   },
   container: {
     flex: 1,
     backgroundColor: '#F2F2F2',
-    justifyContent: 'center',
-  },
+    justifyContent: 'center'
+  }
 });
 
 const mapStateToProps = state => ({
   phrazes: state.phraze.phrazes,
+  phrazesByCategory: state.phraze.phrazesByCategory,
+  selectedCategory: state.phraze.selectedCategory
 });
 
 const mapDispatchToProps = dispatch => ({
   onPhrazeAdded: phraze => dispatch(actions.addPhraze(phraze)),
   onCheckBoxPhraze: (key, opt) => dispatch(actions.checkBoxPhraze(key, opt)),
+  onGetPhrazesByCategory: category =>
+    dispatch(actions.getPhrazesByCategory(category))
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(HomeScreen);
