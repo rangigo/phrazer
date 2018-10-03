@@ -14,7 +14,8 @@ import NewPhrazeScreen from "./containers/NewPhrazeScreen";
 import PhrazeDetailScreen from "./containers/PhrazeDetailScreen";
 
 Expo.Font.loadAsync({
-  Roboto: require("./fonts/Roboto/Roboto-Regular.ttf")
+  Roboto: require("./fonts/Roboto/Roboto-Regular.ttf"),
+  "Roboto-Bold": require("./fonts/Roboto/Roboto-Black.ttf")
 });
 
 const NewPhrazeStack = createDismissableStackNavigator(

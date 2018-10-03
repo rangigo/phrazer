@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { ScrollView, View, StyleSheet } from 'react-native';
 import Text from '../components/MyText';
 import { Icon, CheckBox, Button } from 'react-native-elements';
-import { Dropdown } from 'react-native-material-dropdown';
 import { TextField } from 'react-native-material-textfield';
 
 import * as actions from '../actions';
@@ -75,6 +74,7 @@ class PhrazeDetailScreen extends Component {
           label="Category"
           value={category}
           onChangeText={category => this.setState({ category })}
+          tintColor="#33AAAA"
         />
         <TextField
           label={'Native'}

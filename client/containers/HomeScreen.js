@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import * as actions from '../actions';
@@ -9,6 +9,7 @@ import PhrazeTip from '../components/PhrazeTip';
 import AddButtonWithModal from '../components/AddButtonWithModal';
 import FilterModal from '../components/FilterModal';
 import PhSectionList from '../components/PhSectionList';
+import PhSelectionListHeader from "../components/PhSelectionListHeader";
 
 class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -84,7 +85,7 @@ class HomeScreen extends Component {
   };
 
   renderSectionHeader = ({ section: { title } }) => {
-    return <Text>{title}</Text>;
+    return <PhSelectionListHeader title={title} />;
   };
 
   openPhrazeDetail = item => {
