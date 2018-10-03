@@ -5,12 +5,14 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducers from "./reducers";
 
-import { createSwitchNavigator, createStackNavigator } from "react-navigation";
+import { createSwitchNavigator, createStackNavigator, createDrawerNavigator } from "react-navigation";
 import createDismissableStackNavigator from "./helpers/createDissmissableStackNavigator";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 
 import LoginScreen from "./components/LoginScreen";
 import NewPhrazeScreen from "./containers/NewPhrazeScreen";
+import DrawerContainer from "./components/DrawerContainer";
+import HomeScreen from "./containers/HomeScreen";
 import PhrazeDetailScreen from "./containers/PhrazeDetailScreen";
 
 Expo.Font.loadAsync({
@@ -35,10 +37,17 @@ const NewPhrazeStack = createDismissableStackNavigator(
   }
 );
 
+const DrawerNavigator = createDrawerNavigator({
+  HomeScreen,
+}, {
+  contentComponent: DrawerContainer
+})
+
 const RootStack = createStackNavigator(
   {
     BottomTabNavigator,
-    NewPhrazeStack
+    NewPhrazeStack,
+    DrawerNavigator,
   },
   {
     mode: "modal",

@@ -15,3 +15,9 @@ export const checkBoxPhraze = (key, opt) => ({
   key,
   opt
 });
+
+export const getPhrazesByCategory = (payload) => ({
+  type: actionTypes.GET_PHRAZES_BY_CATEGORY,
+  payload: payload
+})
+
