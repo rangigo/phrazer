@@ -9,7 +9,7 @@ import PhrazeTip from '../components/PhrazeTip';
 import AddButtonWithModal from '../components/AddButtonWithModal';
 import FilterModal from '../components/FilterModal';
 import PhSectionList from '../components/PhSectionList';
-import PhSelectionListHeader from "../components/PhSelectionListHeader";
+import PhSelectionListHeader from '../components/PhSelectionListHeader';
 
 class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -89,7 +89,10 @@ class HomeScreen extends Component {
   };
 
   openPhrazeDetail = item => {
-    this.props.navigation.navigate('PhrazeDetailScreen', { item });
+    this.props.navigation.navigate('PhrazeDetailScreen', {
+      item,
+      parentNavigation: this.props.navigation,
+    });
   };
 
   render() {

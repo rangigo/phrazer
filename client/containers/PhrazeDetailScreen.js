@@ -44,6 +44,7 @@ class PhrazeDetailScreen extends Component {
       category: item.category,
       phraze: item.phraze,
       translated: item.translated,
+      isPublic: item.public,
     });
   }
 
@@ -59,6 +60,9 @@ class PhrazeDetailScreen extends Component {
 
     this.props.onSavePhraze(phraze);
     this.props.onGetPhrazesByCategory(phraze.category);
+    this.props.navigation
+      .getParam('parentNavigation')
+      .setParams({ title: phraze.category });
     this.props.navigation.dismiss();
   };
 
@@ -69,7 +73,7 @@ class PhrazeDetailScreen extends Component {
 
   render() {
     const { navigation } = this.props;
-    const { phraze, translated, category } = this.state;
+    const { phraze, translated, category, isPublic } = this.state;
     const item = navigation.getParam('item', false);
 
     if (!item) return <Text>No Data</Text>;
@@ -121,8 +125,8 @@ class PhrazeDetailScreen extends Component {
             checkedColor="#33AAAA"
             textStyle={{ color: '#777777', fontWeight: '300' }}
             title="Public"
-            checked={item.public}
-            onPress={() => {}}
+            checked={isPublic}
+            onPress={() => this.setState({ isPublic: !isPublic })}
           />
         </ScrollView>
       </AndroidBackHandler>
