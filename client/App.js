@@ -5,7 +5,11 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducers from "./reducers";
 
-import { createSwitchNavigator, createStackNavigator, createDrawerNavigator } from "react-navigation";
+import {
+  createSwitchNavigator,
+  createStackNavigator,
+  createDrawerNavigator
+} from "react-navigation";
 import createDismissableStackNavigator from "./helpers/createDissmissableStackNavigator";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 
@@ -16,7 +20,8 @@ import HomeScreen from "./containers/HomeScreen";
 import PhrazeDetailScreen from "./containers/PhrazeDetailScreen";
 
 Expo.Font.loadAsync({
-  Roboto: require("./fonts/Roboto/Roboto-Regular.ttf")
+  Roboto: require("./fonts/Roboto/Roboto-Regular.ttf"),
+  "Roboto-Bold": require("./fonts/Roboto/Roboto-Black.ttf")
 });
 
 const NewPhrazeStack = createDismissableStackNavigator(
@@ -37,17 +42,20 @@ const NewPhrazeStack = createDismissableStackNavigator(
   }
 );
 
-const DrawerNavigator = createDrawerNavigator({
-  HomeScreen,
-}, {
-  contentComponent: DrawerContainer
-})
+const DrawerNavigator = createDrawerNavigator(
+  {
+    HomeScreen
+  },
+  {
+    contentComponent: DrawerContainer
+  }
+);
 
 const RootStack = createStackNavigator(
   {
     BottomTabNavigator,
     NewPhrazeStack,
-    DrawerNavigator,
+    DrawerNavigator
   },
   {
     mode: "modal",
