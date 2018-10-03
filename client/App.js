@@ -6,7 +6,7 @@ import { createStore } from "redux";
 import reducers from "./reducers";
 
 import { createSwitchNavigator, createStackNavigator } from "react-navigation";
-import createDismissableStackNavigator from "./helpers/createDissmissableStackNavigator";
+import createDismissableStackNavigator from "./navigation/helpers/createDissmissableStackNavigator";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 
 import LoginScreen from "./components/LoginScreen";
