@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import Expo from "expo";
+import Colors from "../config/colors";
 
 export default (PhSelectionListHeader = ({ title }) => {
   return (
@@ -14,11 +15,11 @@ styles = StyleSheet.create({
   container: {
     paddingVertical: 16,
     paddingHorizontal: 16,
-    backgroundColor: "#F2F2F2"
+    backgroundColor: Colors.backgroundColor
   },
   title: {
     fontFamily: "Roboto-Bold",
     fontSize: 30,
-    color: "#33AAAA"
+    color: Colors.mainColor.light
   }
 });

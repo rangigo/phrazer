@@ -7,6 +7,7 @@ import { Dropdown } from "react-native-material-dropdown";
 import { TextField } from "react-native-material-textfield";
 
 import * as actions from "../actions";
+import Colors from "../config/colors";
 
 const data = [
   { value: "Finnish" },
@@ -20,7 +21,7 @@ class PhrazeDetailScreen extends Component {
     headerLeft: (
       <Icon
         name="close"
-        color="white"
+        color={Colors.text.white}
         onPress={() => navigation.dismiss()}
         underlayColor="transparent"
         containerStyle={{ marginLeft: 20 }}
@@ -79,7 +80,7 @@ class PhrazeDetailScreen extends Component {
           label={"Native"}
           value={item.phraze}
           onChangeText={phraze => this.setState({ phraze })}
-          tintColor="#33AAAA"
+          tintColor={Colors.mainColor.light}
           multiline
           fontSize={32}
         />
@@ -88,17 +89,17 @@ class PhrazeDetailScreen extends Component {
           label="Translation"
           value={item.translated}
           onChangeText={translated => this.setState({ translated })}
-          tintColor="#33AAAA"
+          tintColor={Colors.mainColor.light}
           multiline
         />
 
         <View style={styles.recordContainer}>
-          <Text style={{ color: "#586D79", fontSize: 18 }}>
+          <Text style={{ color: Colors.mainColor.dark, fontSize: 18 }}>
             Play the record
           </Text>
           <Icon
             name="play-arrow"
-            color="#33AAAA"
+            color={Colors.mainColor.light}
             reverse
             raised
             containerStyle={{ marginVertical: 15 }}
@@ -110,8 +111,8 @@ class PhrazeDetailScreen extends Component {
           iconType="material"
           checkedIcon="check-box"
           uncheckedIcon="check-box-outline-blank"
-          checkedColor="#33AAAA"
-          textStyle={{ color: "#777777", fontWeight: "300" }}
+          checkedColor={Colors.mainColor.light}
+          textStyle={{ color: Colors.icon.grey.dark, fontWeight: "300" }}
           title="Public"
           checked={item.public}
           onPress={() => {}}
@@ -124,7 +125,7 @@ class PhrazeDetailScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: Colors.backgroundColor,
     padding: 15
   },
   recordContainer: {
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
     marginVertical: 15
   },
   checkBoxContainer: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: Colors.backgroundColor,
     borderWidth: 0,
     padding: 0,
     marginLeft: 0,

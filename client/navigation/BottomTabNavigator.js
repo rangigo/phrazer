@@ -9,6 +9,7 @@ import HomeScreen from "./../containers/HomeScreen";
 import ChatScreen from "./../containers/ChatScreen";
 import FeedScreen from "./../containers/FeedScreen";
 import ProfileScreen from "./../containers/ProfileScreen";
+import Colors from "../config/colors";
 
 const TabNavigator = createMaterialBottomTabNavigator(
   {
@@ -48,9 +49,9 @@ const TabNavigator = createMaterialBottomTabNavigator(
   {
     shifting: false,
     initialRouteName: "HomeStack",
-    activeColor: "#DEF2F1",
-    inactiveColor: "#2B7A78",
-    barStyle: { backgroundColor: "#4AA9A8" }
+    activeColor: Colors.icon.green.light,
+    inactiveColor: Colors.mainColor.dark,
+    barStyle: { backgroundColor: Colors.mainColor.light }
   }
 );
 

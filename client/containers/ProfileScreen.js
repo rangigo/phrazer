@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { View, Text, StyleSheet } from "react-native";
+import Colors from "./../config/colors";
 
 class ProfileScreen extends Component {
   render() {
@@ -15,7 +15,7 @@ class ProfileScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#F2F2F2",
+    backgroundColor: Colors.backgroundColor,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
@@ -24,12 +24,12 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "Roboto-Bold",
     fontSize: 40,
-    color: "#2B7A78"
+    color: Colors.mainColor.dark
   },
   description: {
     fontFamily: "Roboto",
     fontSize: 20,
-    color: "#33AAAA"
+    color: Colors.text.dark
   }
 });
 

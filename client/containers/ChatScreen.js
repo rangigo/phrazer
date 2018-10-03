@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import { Icon } from "react-native-elements";
 import Text from "../components/MyText";
+import Colors from "./../config/colors";
 
 const messagesInit = [
   {
@@ -46,7 +47,7 @@ class ChatScreen extends Component {
       return (
         <View style={styles.conversation}>
           <View style={styles.col1}>
-            <Icon name="person" color="grey" />
+            <Icon name="person" style={styles.photoPlaceholder} />
           </View>
           <View style={styles.col2}>
             <Text>{chat.name}</Text>
@@ -69,16 +70,19 @@ class ChatScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  photoPlaceholder: {
+    color: Colors.icon.grey.dark
+  },
   conversation: {
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#ccc"
+    borderBottomColor: Colors.divider.light
   },
   container: {
     height: "100%",
-    backgroundColor: "white"
+    backgroundColor: Colors.backgroundColor
   },
   col1: {
     flex: 0.2,

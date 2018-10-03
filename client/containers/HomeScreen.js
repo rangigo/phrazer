@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, StyleSheet, Text } from "react-native";
 import { Icon } from "react-native-elements";
+import Colors from "./../config/colors";
 
 import * as actions from "../actions";
 import Phraze from "../components/Phraze";
@@ -16,7 +17,7 @@ class HomeScreen extends Component {
     headerLeft: (
       <Icon
         name="filter-list"
-        color="white"
+        style={styles.filterButton}
         underlayColor="transparent"
         onPress={() => navigation.state.params.handleFilter()}
       />
@@ -117,17 +118,6 @@ class HomeScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  footer: {
-    height: 90
-  },
-  container: {
-    flex: 1,
-    backgroundColor: "#F2F2F2",
-    justifyContent: "center"
-  }
-});
-
 const mapStateToProps = state => ({
   phrazes: state.phraze.phrazes,
   phrazesByCategory: state.phraze.phrazesByCategory,
@@ -145,3 +135,17 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(HomeScreen);
+
+const styles = StyleSheet.create({
+  filterButton: {
+    color: Colors.text.white
+  },
+  footer: {
+    height: 90
+  },
+  container: {
+    flex: 1,
+    backgroundColor: Colors.backgroundColor,
+    justifyContent: "center"
+  }
+});

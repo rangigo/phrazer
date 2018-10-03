@@ -11,6 +11,7 @@ import {
   CardButton,
   CardButtonIcon
 } from "./../material-cards-custom";
+import Colors from "../config/colors";
 
 class Phraze extends Component {
   constructor(props) {
@@ -20,9 +21,9 @@ class Phraze extends Component {
   render() {
     const { item, onPressCheckBox, onPressPhraze } = this.props;
 
-    const inactiveButtonColor = "#CCC";
-    const activeButtonColor = "#33AAAA";
-    const activeStarColor = "#F6BF26";
+    const inactiveButtonColor = Colors.button.inactive;
+    const activeButtonColor = Colors.mainColor.light;
+    const activeStarColor = Colors.icon.yellow;
 
     const currentButtonsState = {
       public: {
