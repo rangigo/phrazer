@@ -3,20 +3,27 @@ import Modal from 'react-native-modal';
 import { View, StyleSheet } from 'react-native';
 import { CheckBox, Divider, Button } from 'react-native-elements';
 import Text from './MyText';
-
-const categories = [
-  { category: 'Meeting' },
-  { category: 'Greeting' },
-  { category: 'Hangout' }
-];
+import _ from 'lodash';
 
 const FilterModal = ({
   showModal,
   checkedCategory,
   onPressCategory,
   onGetPhrazesByCategory,
-  onCancelModal
+  onCancelModal,
+  data,
 }) => {
+  let categories = _.groupBy(data, item => item.category);
+  categories = _.reduce(
+    categories,
+    (acc, value, key) => {
+      acc.push({ category: key });
+      return acc;
+    },
+    [],
+  );
+  console.log(categories)
+
   return (
     <Modal
       isVisible={showModal}
@@ -37,7 +44,7 @@ const FilterModal = ({
             containerStyle={styles.radioButtonContainer}
             onPress={() => onPressCategory(el.category)}
             textStyle={{
-              color: el.category === checkedCategory ? '#33AAAA' : '#bfbfbf'
+              color: el.category === checkedCategory ? '#33AAAA' : '#bfbfbf',
             }}
           />
         ))}
@@ -64,30 +71,30 @@ const FilterModal = ({
 const styles = StyleSheet.create({
   radioButtonContainer: {
     backgroundColor: 'white',
-    borderWidth: 0
+    borderWidth: 0,
   },
   modalContainer: {
-    marginHorizontal: 50
+    marginHorizontal: 50,
   },
   modalContent: {
     backgroundColor: 'white',
     borderRadius: 4,
-    borderColor: 'rgba(0, 0, 0, 0.1)'
+    borderColor: 'rgba(0, 0, 0, 0.1)',
   },
   modalTitle: {
     color: '#727272',
     padding: 15,
-    fontSize: 20
+    fontSize: 20,
   },
   modalFooter: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    paddingVertical: 5
+    paddingVertical: 5,
   },
   button: {
-    backgroundColor: 'transparent'
-  }
+    backgroundColor: 'transparent',
+  },
 });
 
 export default FilterModal;

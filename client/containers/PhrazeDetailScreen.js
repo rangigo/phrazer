@@ -3,18 +3,10 @@ import { connect } from 'react-redux';
 import { ScrollView, View, StyleSheet } from 'react-native';
 import Text from '../components/MyText';
 import { Icon, CheckBox, Button } from 'react-native-elements';
-import { Dropdown } from 'react-native-material-dropdown';
 import { TextField } from 'react-native-material-textfield';
 import { AndroidBackHandler } from 'react-navigation-backhandler';
 
 import * as actions from '../actions';
-
-const data = [
-  { value: 'Finnish' },
-  { value: 'German' },
-  { value: 'Lithuanian' },
-  { value: 'Czech' }
-];
 
 class PhrazeDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -34,18 +26,26 @@ class PhrazeDetailScreen extends Component {
         title="SAVE"
         onPress={() => navigation.state.params.handleSave()}
       />
-    )
+    ),
   });
 
   state = {
     category: '',
     phraze: '',
     translated: '',
-    isPublic: false
+    isPublic: false,
   };
 
   componentDidMount() {
-    this.props.navigation.setParams({ handleSave: this.onPressSave });
+    const { navigation } = this.props;
+    navigation.setParams({ handleSave: this.onPressSave });
+    const item = navigation.getParam('item', false);
+    this.setState({
+      category: item.category,
+      phraze: item.phraze,
+      translated: item.translated,
+      isPublic: item.public,
+    });
   }
 
   onPressSave = () => {
@@ -59,6 +59,10 @@ class PhrazeDetailScreen extends Component {
     if (this.state.isPublic != item.public) phraze.public = this.state.isPublic;
 
     this.props.onSavePhraze(phraze);
+    this.props.onGetPhrazesByCategory(phraze.category);
+    this.props.navigation
+      .getParam('parentNavigation')
+      .setParams({ title: phraze.category });
     this.props.navigation.dismiss();
   };
 
@@ -69,6 +73,7 @@ class PhrazeDetailScreen extends Component {
 
   render() {
     const { navigation } = this.props;
+    const { phraze, translated, category, isPublic } = this.state;
     const item = navigation.getParam('item', false);
 
     if (!item) return <Text>No Data</Text>;
@@ -76,15 +81,15 @@ class PhrazeDetailScreen extends Component {
     return (
       <AndroidBackHandler onBackPress={this.onBackButtonPressAndroid}>
         <ScrollView style={styles.container}>
-          <Dropdown
+          <TextField
             label="Category"
-            data={data}
-            value={this.props.category}
+            value={category}
             onChangeText={category => this.setState({ category })}
+            tintColor="#33AAAA"
           />
           <TextField
             label={'Native'}
-            value={item.phraze}
+            value={phraze}
             onChangeText={phraze => this.setState({ phraze })}
             tintColor="#33AAAA"
             multiline
@@ -93,7 +98,7 @@ class PhrazeDetailScreen extends Component {
 
           <TextField
             label="Translation"
-            value={item.translated}
+            value={translated}
             onChangeText={translated => this.setState({ translated })}
             tintColor="#33AAAA"
             multiline
@@ -120,8 +125,8 @@ class PhrazeDetailScreen extends Component {
             checkedColor="#33AAAA"
             textStyle={{ color: '#777777', fontWeight: '300' }}
             title="Public"
-            checked={item.public}
-            onPress={() => {}}
+            checked={isPublic}
+            onPress={() => this.setState({ isPublic: !isPublic })}
           />
         </ScrollView>
       </AndroidBackHandler>
@@ -133,13 +138,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    padding: 15
+    padding: 15,
   },
   recordContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 15
+    marginVertical: 15,
   },
   checkBoxContainer: {
     backgroundColor: '#FFFFFF',
@@ -147,19 +152,21 @@ const styles = StyleSheet.create({
     padding: 0,
     marginLeft: 0,
     marginRight: 0,
-    marginVertical: 0
+    marginVertical: 0,
   },
   saveButton: {
     backgroundColor: 'transparent',
-    padding: 3
-  }
+    padding: 3,
+  },
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSavePhraze: phraze => dispatch(actions.editPhrase(phraze))
+  onSavePhraze: phraze => dispatch(actions.editPhrase(phraze)),
+  onGetPhrazesByCategory: category =>
+    dispatch(actions.getPhrazesByCategory(category)),
 });
 
 export default connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(PhrazeDetailScreen);
