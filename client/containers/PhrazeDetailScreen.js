@@ -4,6 +4,7 @@ import { ScrollView, View, StyleSheet } from 'react-native';
 import Text from '../components/MyText';
 import { Icon, CheckBox, Button } from 'react-native-elements';
 import { TextField } from 'react-native-material-textfield';
+import { AndroidBackHandler } from 'react-navigation-backhandler';
 
 import * as actions from '../actions';
 
@@ -61,6 +62,11 @@ class PhrazeDetailScreen extends Component {
     this.props.navigation.dismiss();
   };
 
+  onBackButtonPressAndroid = () => {
+    this.props.navigation.dismiss();
+    return true;
+  };
+
   render() {
     const { navigation } = this.props;
     const { phraze, translated, category } = this.state;
@@ -69,55 +75,57 @@ class PhrazeDetailScreen extends Component {
     if (!item) return <Text>No Data</Text>;
 
     return (
-      <ScrollView style={styles.container}>
-        <TextField
-          label="Category"
-          value={category}
-          onChangeText={category => this.setState({ category })}
-          tintColor="#33AAAA"
-        />
-        <TextField
-          label={'Native'}
-          value={phraze}
-          onChangeText={phraze => this.setState({ phraze })}
-          tintColor="#33AAAA"
-          multiline
-          fontSize={32}
-        />
-
-        <TextField
-          label="Translation"
-          value={translated}
-          onChangeText={translated => this.setState({ translated })}
-          tintColor="#33AAAA"
-          multiline
-        />
-
-        <View style={styles.recordContainer}>
-          <Text style={{ color: '#586D79', fontSize: 18 }}>
-            Play the record
-          </Text>
-          <Icon
-            name="play-arrow"
-            color="#33AAAA"
-            reverse
-            raised
-            containerStyle={{ marginVertical: 15 }}
-            size={26}
+      <AndroidBackHandler onBackPress={this.onBackButtonPressAndroid}>
+        <ScrollView style={styles.container}>
+          <TextField
+            label="Category"
+            value={category}
+            onChangeText={category => this.setState({ category })}
+            tintColor="#33AAAA"
           />
-        </View>
-        <CheckBox
-          containerStyle={styles.checkBoxContainer}
-          iconType="material"
-          checkedIcon="check-box"
-          uncheckedIcon="check-box-outline-blank"
-          checkedColor="#33AAAA"
-          textStyle={{ color: '#777777', fontWeight: '300' }}
-          title="Public"
-          checked={item.public}
-          onPress={() => {}}
-        />
-      </ScrollView>
+          <TextField
+            label={'Native'}
+            value={phraze}
+            onChangeText={phraze => this.setState({ phraze })}
+            tintColor="#33AAAA"
+            multiline
+            fontSize={32}
+          />
+
+          <TextField
+            label="Translation"
+            value={translated}
+            onChangeText={translated => this.setState({ translated })}
+            tintColor="#33AAAA"
+            multiline
+          />
+
+          <View style={styles.recordContainer}>
+            <Text style={{ color: '#586D79', fontSize: 18 }}>
+              Play the record
+            </Text>
+            <Icon
+              name="play-arrow"
+              color="#33AAAA"
+              reverse
+              raised
+              containerStyle={{ marginVertical: 15 }}
+              size={26}
+            />
+          </View>
+          <CheckBox
+            containerStyle={styles.checkBoxContainer}
+            iconType="material"
+            checkedIcon="check-box"
+            uncheckedIcon="check-box-outline-blank"
+            checkedColor="#33AAAA"
+            textStyle={{ color: '#777777', fontWeight: '300' }}
+            title="Public"
+            checked={item.public}
+            onPress={() => {}}
+          />
+        </ScrollView>
+      </AndroidBackHandler>
     );
   }
 }
@@ -150,7 +158,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => ({
   onSavePhraze: phraze => dispatch(actions.editPhrase(phraze)),
-  onGetPhrazesByCategory: category => dispatch(actions.getPhrazesByCategory(category))
+  onGetPhrazesByCategory: category =>
+    dispatch(actions.getPhrazesByCategory(category)),
 });
 
 export default connect(
