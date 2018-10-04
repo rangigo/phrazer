@@ -15,3 +15,8 @@ export const checkBoxPhraze = (key, opt) => ({
   key,
   opt
 });
+
+export const deletePhraze = payload => ({
+  type: actionTypes.DELETE_PHRASE,
+  payload
+})

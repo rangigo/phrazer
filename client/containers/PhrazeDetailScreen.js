@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { ScrollView, View, StyleSheet } from "react-native";
+import { ScrollView, View, StyleSheet, Alert } from "react-native";
 import Text from "../components/MyText";
 import { Icon, CheckBox, Button } from "react-native-elements";
 import { Dropdown } from "react-native-material-dropdown";
@@ -48,18 +48,41 @@ class PhrazeDetailScreen extends Component {
   }
 
   onPressSave = () => {
-    const item = this.props.navigation.getParam("item", {});
+           const item = this.props.navigation.getParam("item", {});
 
-    const phraze = { ...item };
+            const phraze = { ...item };
 
-    if (this.state.category != "") phraze.category = this.state.category;
-    if (this.state.phraze != "") phraze.phraze = this.state.phraze;
-    if (this.state.translated != "") phraze.translated = this.state.translated;
-    if (this.state.isPublic != item.public) phraze.public = this.state.isPublic;
+            if (this.state.category != "") phraze.category = this.state.category;
+            if (this.state.phraze != "") phraze.phraze = this.state.phraze;
+            if (this.state.translated != "") phraze.translated = this.state.translated;
+            if (this.state.isPublic != item.public) phraze.public = this.state.isPublic;
 
-    this.props.onSavePhraze(phraze);
-    this.props.navigation.dismiss();
-  };
+            this.props.onSavePhraze(phraze);
+            this.props.navigation.dismiss();
+    };
+
+  handleDelete = () => {
+    Alert.alert(
+      "Please Confirm",
+      "Are you sure you want to delete\nthis Phraze?",
+      [
+        {text: 'Cancel', onPress: () => console.log('Cancel')},
+        {text: 'Confirm', onPress: () =>   {
+          const item = this.props.navigation.getParam("item", {});
+          const phraze = { ...item };
+
+          this.props.onDeletePhraze(phraze.key);
+          this.props.navigation.dismiss();
+
+        }
+      }
+
+      ],
+      { cancelable: true }
+    );
+  }
+
+
 
   render() {
     const { navigation } = this.props;
@@ -116,6 +139,13 @@ class PhrazeDetailScreen extends Component {
           checked={item.public}
           onPress={() => {}}
         />
+      <Icon
+      name = "delete"
+      containerStyle={styles.deleteButtonContainer}
+      onPress = { this.handleDelete }
+      color ="#ff0000"
+      size = {28}
+      />
       </ScrollView>
     );
   }
@@ -144,11 +174,16 @@ const styles = StyleSheet.create({
   saveButton: {
     backgroundColor: "transparent",
     padding: 3
+  },
+  deleteButtonContainer:{
+    marginVertical: 15,
+    alignItems: "flex-start"
   }
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSavePhraze: phraze => dispatch(actions.editPhrase(phraze))
+  onSavePhraze: phraze => dispatch(actions.editPhrase(phraze)),
+  onDeletePhraze: phrazeKey => dispatch(actions.deletePhraze(phrazeKey))
 });
 
 export default connect(
