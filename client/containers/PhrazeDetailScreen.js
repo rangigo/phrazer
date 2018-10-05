@@ -1,13 +1,12 @@
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { ScrollView, View, StyleSheet } from "react-native";
+import Text from "../components/MyText";
+import { Icon, CheckBox, Button } from "react-native-elements";
+import { TextField } from "react-native-material-textfield";
+import { AndroidBackHandler } from "react-navigation-backhandler";
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { ScrollView, View, StyleSheet } from 'react-native';
-import Text from '../components/MyText';
-import { Icon, CheckBox, Button } from 'react-native-elements';
-import { TextField } from 'react-native-material-textfield';
-import { AndroidBackHandler } from 'react-navigation-backhandler';
-
-import * as actions from '../actions';
+import * as actions from "../actions";
 import Colors from "../config/colors";
 
 class PhrazeDetailScreen extends Component {
@@ -21,49 +20,49 @@ class PhrazeDetailScreen extends Component {
         containerStyle={{ marginLeft: 20 }}
       />
     ),
-    headerTitle: 'Edit Phraze',
+    headerTitle: "Edit Phraze",
     headerRight: (
       <Button
         buttonStyle={styles.saveButton}
         title="SAVE"
         onPress={() => navigation.state.params.handleSave()}
       />
-    ),
+    )
   });
 
   state = {
-    category: '',
-    phraze: '',
-    translated: '',
-    isPublic: false,
+    category: "",
+    phraze: "",
+    translated: "",
+    isPublic: false
   };
 
   componentDidMount() {
     const { navigation } = this.props;
     navigation.setParams({ handleSave: this.onPressSave });
-    const item = navigation.getParam('item', false);
+    const item = navigation.getParam("item", false);
     this.setState({
       category: item.category,
       phraze: item.phraze,
       translated: item.translated,
-      isPublic: item.public,
+      isPublic: item.public
     });
   }
 
   onPressSave = () => {
-    const item = this.props.navigation.getParam('item', {});
+    const item = this.props.navigation.getParam("item", {});
 
     const phraze = { ...item };
 
-    if (this.state.category != '') phraze.category = this.state.category;
-    if (this.state.phraze != '') phraze.phraze = this.state.phraze;
-    if (this.state.translated != '') phraze.translated = this.state.translated;
+    if (this.state.category != "") phraze.category = this.state.category;
+    if (this.state.phraze != "") phraze.phraze = this.state.phraze;
+    if (this.state.translated != "") phraze.translated = this.state.translated;
     if (this.state.isPublic != item.public) phraze.public = this.state.isPublic;
 
     this.props.onSavePhraze(phraze);
     this.props.onGetPhrazesByCategory(phraze.category);
     this.props.navigation
-      .getParam('parentNavigation')
+      .getParam("parentNavigation")
       .setParams({ title: phraze.category });
     this.props.navigation.dismiss();
   };
@@ -76,7 +75,7 @@ class PhrazeDetailScreen extends Component {
   render() {
     const { navigation } = this.props;
     const { phraze, translated, category, isPublic } = this.state;
-    const item = navigation.getParam('item', false);
+    const item = navigation.getParam("item", false);
 
     if (!item) return <Text>No Data</Text>;
 
@@ -87,13 +86,13 @@ class PhrazeDetailScreen extends Component {
             label="Category"
             value={category}
             onChangeText={category => this.setState({ category })}
-            tintColor="#33AAAA"
+            tintColor={Colors.mainColor.light}
           />
           <TextField
-            label={'Native'}
+            label={"Native"}
             value={phraze}
             onChangeText={phraze => this.setState({ phraze })}
-            tintColor="#33AAAA"
+            tintColor={Colors.mainColor.light}
             multiline
             fontSize={32}
           />
@@ -102,17 +101,17 @@ class PhrazeDetailScreen extends Component {
             label="Translation"
             value={translated}
             onChangeText={translated => this.setState({ translated })}
-            tintColor="#33AAAA"
+            tintColor={Colors.mainColor.light}
             multiline
           />
 
           <View style={styles.recordContainer}>
-            <Text style={{ color: '#586D79', fontSize: 18 }}>
+            <Text style={{ color: Colors.text.dark, fontSize: 18 }}>
               Play the record
             </Text>
             <Icon
               name="play-arrow"
-              color="#33AAAA"
+              color={Colors.mainColor.light}
               reverse
               raised
               containerStyle={{ marginVertical: 15 }}
@@ -124,8 +123,8 @@ class PhrazeDetailScreen extends Component {
             iconType="material"
             checkedIcon="check-box"
             uncheckedIcon="check-box-outline-blank"
-            checkedColor="#33AAAA"
-            textStyle={{ color: '#777777', fontWeight: '300' }}
+            checkedColor={Colors.mainColor.light}
+            textStyle={{ color: Colors.icon.grey.dark, fontWeight: "300" }}
             title="Public"
             checked={isPublic}
             onPress={() => this.setState({ isPublic: !isPublic })}
@@ -144,9 +143,9 @@ const styles = StyleSheet.create({
   },
   recordContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    marginVertical: 15
   },
   checkBoxContainer: {
     backgroundColor: Colors.backgroundColor,
@@ -154,21 +153,21 @@ const styles = StyleSheet.create({
     padding: 0,
     marginLeft: 0,
     marginRight: 0,
-    marginVertical: 0,
+    marginVertical: 0
   },
   saveButton: {
-    backgroundColor: 'transparent',
-    padding: 3,
-  },
+    backgroundColor: "transparent",
+    padding: 3
+  }
 });
 
 const mapDispatchToProps = dispatch => ({
   onSavePhraze: phraze => dispatch(actions.editPhrase(phraze)),
   onGetPhrazesByCategory: category =>
-    dispatch(actions.getPhrazesByCategory(category)),
+    dispatch(actions.getPhrazesByCategory(category))
 });
 
 export default connect(
   null,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(PhrazeDetailScreen);

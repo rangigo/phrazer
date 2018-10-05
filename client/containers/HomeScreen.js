@@ -22,7 +22,7 @@ class HomeScreen extends Component {
         onPress={() => navigation.state.params.handleFilter()}
       />
     ),
-    title: navigation.state.params ? navigation.state.params.title : '',
+    title: navigation.state.params ? navigation.state.params.title : ""
   });
 
   state = {
@@ -30,13 +30,13 @@ class HomeScreen extends Component {
     page: 1,
     showTip: true,
     showFilterModal: false,
-    category: 'Meeting',
+    category: "Meeting"
   };
 
   componentDidMount() {
     this.props.navigation.setParams({
       handleFilter: this.onPressFilter,
-      title: this.state.category,
+      title: this.state.category
     });
     this.props.onGetPhrazesByCategory(this.state.category);
   }
@@ -48,7 +48,7 @@ class HomeScreen extends Component {
   onPressFilter = () => {
     this.setState({
       showFilterModal: true,
-      category: this.props.selectedCategory,
+      category: this.props.selectedCategory
     });
   };
 
@@ -90,9 +90,9 @@ class HomeScreen extends Component {
   };
 
   openPhrazeDetail = item => {
-    this.props.navigation.navigate('PhrazeDetailScreen', {
+    this.props.navigation.navigate("PhrazeDetailScreen", {
       item,
-      parentNavigation: this.props.navigation,
+      parentNavigation: this.props.navigation
     });
   };
 
@@ -131,33 +131,22 @@ class HomeScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  footer: {
-    height: 90,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#F2F2F2',
-    justifyContent: 'center',
-  },
-});
-
 const mapStateToProps = state => ({
   phrazes: state.phraze.phrazes,
   phrazesByCategory: state.phraze.phrazesByCategory,
-  selectedCategory: state.phraze.selectedCategory,
+  selectedCategory: state.phraze.selectedCategory
 });
 
 const mapDispatchToProps = dispatch => ({
   onPhrazeAdded: phraze => dispatch(actions.addPhraze(phraze)),
   onCheckBoxPhraze: (key, opt) => dispatch(actions.checkBoxPhraze(key, opt)),
   onGetPhrazesByCategory: category =>
-    dispatch(actions.getPhrazesByCategory(category)),
+    dispatch(actions.getPhrazesByCategory(category))
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(HomeScreen);
 
 const styles = StyleSheet.create({

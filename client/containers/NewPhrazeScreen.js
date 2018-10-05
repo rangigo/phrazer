@@ -69,7 +69,7 @@ class NewPhrazeScreen extends Component {
         <TextField
           label="Category"
           value={category}
-          tintColor="#33AAAA"
+          tintColor={Colors.mainColor.light}
           onChangeText={category => this.setState({ category })}
         />
         <TextField
@@ -90,7 +90,7 @@ class NewPhrazeScreen extends Component {
         />
 
         <View style={styles.recordContainer}>
-          <Text style={{ color: "#586D79", fontSize: 18 }}>Record</Text>
+          <Text style={{ color: Colors.text.dark, fontSize: 18 }}>Record</Text>
           <Icon
             name="mic"
             color={Colors.mainColor.light}
