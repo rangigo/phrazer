@@ -17,7 +17,7 @@ class HomeScreen extends Component {
     headerLeft: (
       <Icon
         name="filter-list"
-        style={styles.filterButton}
+        color={Colors.icon.white}
         underlayColor="transparent"
         onPress={() => navigation.state.params.handleFilter()}
       />
@@ -137,9 +137,6 @@ export default connect(
 )(HomeScreen);
 
 const styles = StyleSheet.create({
-  filterButton: {
-    color: Colors.text.white
-  },
   footer: {
     height: 90
   },
