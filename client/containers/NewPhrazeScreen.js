@@ -66,10 +66,10 @@ class NewPhrazeScreen extends Component {
 
     return (
       <ScrollView style={styles.container}>
-        <Dropdown
-          label="Categories"
-          data={data}
+        <TextField
+          label="Category"
           value={category}
+          tintColor="#33AAAA"
           onChangeText={category => this.setState({ category })}
         />
         <TextField

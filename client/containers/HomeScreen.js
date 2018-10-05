@@ -21,7 +21,8 @@ class HomeScreen extends Component {
         underlayColor="transparent"
         onPress={() => navigation.state.params.handleFilter()}
       />
-    )
+    ),
+    title: navigation.state.params ? navigation.state.params.title : '',
   });
 
   state = {
@@ -29,11 +30,14 @@ class HomeScreen extends Component {
     page: 1,
     showTip: true,
     showFilterModal: false,
-    category: "Meeting"
+    category: 'Meeting',
   };
 
   componentDidMount() {
-    this.props.navigation.setParams({ handleFilter: this.onPressFilter });
+    this.props.navigation.setParams({
+      handleFilter: this.onPressFilter,
+      title: this.state.category,
+    });
     this.props.onGetPhrazesByCategory(this.state.category);
   }
 
@@ -42,7 +46,10 @@ class HomeScreen extends Component {
    */
 
   onPressFilter = () => {
-    this.setState({ showFilterModal: true });
+    this.setState({
+      showFilterModal: true,
+      category: this.props.selectedCategory,
+    });
   };
 
   hideFilterModal = () => {
@@ -56,6 +63,7 @@ class HomeScreen extends Component {
   onGetPhrazesByCategory = () => {
     this.hideFilterModal();
     this.props.onGetPhrazesByCategory(this.state.category);
+    this.props.navigation.setParams({ title: this.state.category });
   };
 
   onCancelModal = () => {
@@ -82,16 +90,20 @@ class HomeScreen extends Component {
   };
 
   openPhrazeDetail = item => {
-    this.props.navigation.navigate("PhrazeDetailScreen", { item });
+    this.props.navigation.navigate('PhrazeDetailScreen', {
+      item,
+      parentNavigation: this.props.navigation,
+    });
   };
 
   render() {
-    const { navigation, phrazesByCategory } = this.props;
+    const { navigation, phrazesByCategory, phrazes } = this.props;
     const { showFilterModal, showTip, category } = this.state;
 
     const phrazeTip = showTip ? (
       <PhrazeTip onPressCancel={() => this.setState({ showTip: false })} />
     ) : null;
+    console.log(navigation);
 
     return (
       <View style={styles.container}>
@@ -111,6 +123,7 @@ class HomeScreen extends Component {
           onPressCategory={this.onPressCategory}
           onGetPhrazesByCategory={this.onGetPhrazesByCategory}
           onCancelModal={this.onCancelModal}
+          data={phrazes}
         />
         <AddButtonWithModal navigation={navigation} />
       </View>
@@ -118,22 +131,33 @@ class HomeScreen extends Component {
   }
 }
 
+const styles = StyleSheet.create({
+  footer: {
+    height: 90,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#F2F2F2',
+    justifyContent: 'center',
+  },
+});
+
 const mapStateToProps = state => ({
   phrazes: state.phraze.phrazes,
   phrazesByCategory: state.phraze.phrazesByCategory,
-  selectedCategory: state.phraze.selectedCategory
+  selectedCategory: state.phraze.selectedCategory,
 });
 
 const mapDispatchToProps = dispatch => ({
   onPhrazeAdded: phraze => dispatch(actions.addPhraze(phraze)),
   onCheckBoxPhraze: (key, opt) => dispatch(actions.checkBoxPhraze(key, opt)),
   onGetPhrazesByCategory: category =>
-    dispatch(actions.getPhrazesByCategory(category))
+    dispatch(actions.getPhrazesByCategory(category)),
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(HomeScreen);
 
 const styles = StyleSheet.create({
