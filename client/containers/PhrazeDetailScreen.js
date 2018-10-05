@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, View, StyleSheet } from 'react-native';
@@ -7,13 +8,14 @@ import { TextField } from 'react-native-material-textfield';
 import { AndroidBackHandler } from 'react-navigation-backhandler';
 
 import * as actions from '../actions';
+import Colors from "../config/colors";
 
 class PhrazeDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerLeft: (
       <Icon
         name="close"
-        color="white"
+        color={Colors.text.white}
         onPress={() => navigation.dismiss()}
         underlayColor="transparent"
         containerStyle={{ marginLeft: 20 }}
@@ -137,8 +139,8 @@ class PhrazeDetailScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    padding: 15,
+    backgroundColor: Colors.backgroundColor,
+    padding: 15
   },
   recordContainer: {
     flex: 1,
@@ -147,7 +149,7 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
   checkBoxContainer: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: Colors.backgroundColor,
     borderWidth: 0,
     padding: 0,
     marginLeft: 0,

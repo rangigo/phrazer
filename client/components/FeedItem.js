@@ -9,6 +9,7 @@ import {
   CardAction,
   CardButton
 } from "./../material-cards-custom";
+import Colors from "../config/colors";
 
 class FeedItem extends Component {
   constructor(props) {
@@ -44,7 +45,9 @@ class FeedItem extends Component {
       added || !item.foreign ? styles.addButtonDisabled : styles.addButton;
     const addButtonTitle = added ? "Added" : "Add";
 
-    const translateButtonColor = item.foreign ? "#CCC" : "#2B7A78";
+    const translateButtonColor = item.foreign
+      ? Colors.button.inactive
+      : Colors.mainColor.light;
     const translateButtonTitle = item.foreign ? "Translated" : "Translate";
 
     const foreign = item.foreign ? (
@@ -70,7 +73,7 @@ class FeedItem extends Component {
           <CardButton
             onPress={this.onMainAction}
             title={addButtonTitle}
-            color="white"
+            color={Colors.text.white}
             style={addButtonStyle}
           />
         </CardAction>
@@ -81,10 +84,10 @@ class FeedItem extends Component {
 
 const styles = StyleSheet.create({
   addButton: {
-    backgroundColor: "#FF5E00"
+    backgroundColor: Colors.button.action
   },
   addButtonDisabled: {
-    backgroundColor: "#CCC"
+    backgroundColor: Colors.button.inactive
   },
   actions: {
     flexDirection: "row",
@@ -95,7 +98,7 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
     flexDirection: "row",
     borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    borderBottomColor: Colors.divider.light,
     alignItems: "center"
   },
   col1: {

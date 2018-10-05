@@ -1,9 +1,16 @@
-import React from 'react';
-import Modal from 'react-native-modal';
-import { View, StyleSheet } from 'react-native';
-import { CheckBox, Divider, Button } from 'react-native-elements';
-import Text from './MyText';
+import React from "react";
+import Modal from "react-native-modal";
+import { View, StyleSheet } from "react-native";
+import { CheckBox, Divider, Button } from "react-native-elements";
+import Text from "./MyText";
+import Colors from "../config/colors";
 import _ from 'lodash';
+
+const categories = [
+  { category: "Meeting" },
+  { category: "Greeting" },
+  { category: "Hangout" }
+];
 
 const FilterModal = ({
   showModal,
@@ -32,14 +39,14 @@ const FilterModal = ({
     >
       <View style={styles.modalContent}>
         <Text style={styles.modalTitle}>Categories</Text>
-        <Divider style={{ backgroundColor: '#ccc' }} />
+        <Divider style={styles.divider} />
         {categories.map(el => (
           <CheckBox
             title={el.category}
             key={el.category}
             checkedIcon="dot-circle-o"
             uncheckedIcon="circle-o"
-            checkedColor="#33AAAA"
+            checkedColor={Colors.mainColor.light}
             checked={el.category === checkedCategory}
             containerStyle={styles.radioButtonContainer}
             onPress={() => onPressCategory(el.category)}
@@ -48,18 +55,18 @@ const FilterModal = ({
             }}
           />
         ))}
-        <Divider style={{ backgroundColor: '#ccc' }} />
+        <Divider style={styles.divider} />
         <View style={styles.modalFooter}>
           <Button
             title="CANCEL"
             buttonStyle={styles.button}
-            color="#33AAAA"
+            color={Colors.mainColor.light}
             onPress={onCancelModal}
           />
           <Button
             title="ACCEPT"
             buttonStyle={styles.button}
-            color="#33AAAA"
+            color={Colors.mainColor.light}
             onPress={onGetPhrazesByCategory}
           />
         </View>
@@ -70,31 +77,34 @@ const FilterModal = ({
 
 const styles = StyleSheet.create({
   radioButtonContainer: {
-    backgroundColor: 'white',
-    borderWidth: 0,
+    backgroundColor: Colors.backgroundColor,
+    borderWidth: 0
   },
   modalContainer: {
     marginHorizontal: 50,
   },
   modalContent: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.backgroundColor,
     borderRadius: 4,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
+    borderColor: "rgba(0, 0, 0, 0.1)"
   },
   modalTitle: {
-    color: '#727272',
+    color: Colors.text.dark,
     padding: 15,
     fontSize: 20,
   },
   modalFooter: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    paddingVertical: 5,
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    paddingVertical: 5
   },
   button: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent"
   },
+  divider: {
+    backgroundColor: Colors.divider.light
+  }
 });
 
 export default FilterModal;

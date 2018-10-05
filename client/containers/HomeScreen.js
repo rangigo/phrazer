@@ -1,22 +1,23 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { View, StyleSheet } from 'react-native';
-import { Icon } from 'react-native-elements';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { View, StyleSheet, Text } from "react-native";
+import { Icon } from "react-native-elements";
+import Colors from "./../config/colors";
 
-import * as actions from '../actions';
-import Phraze from '../components/Phraze';
-import PhrazeTip from '../components/PhrazeTip';
-import AddButtonWithModal from '../components/AddButtonWithModal';
-import FilterModal from '../components/FilterModal';
-import PhSectionList from '../components/PhSectionList';
-import PhSelectionListHeader from '../components/PhSelectionListHeader';
+import * as actions from "../actions";
+import Phraze from "../components/Phraze";
+import PhrazeTip from "../components/PhrazeTip";
+import AddButtonWithModal from "../components/AddButtonWithModal";
+import FilterModal from "../components/FilterModal";
+import PhSectionList from "../components/PhSectionList";
+import PhSelectionListHeader from "../components/PhSelectionListHeader";
 
 class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerLeft: (
       <Icon
         name="filter-list"
-        color="white"
+        color={Colors.icon.white}
         underlayColor="transparent"
         onPress={() => navigation.state.params.handleFilter()}
       />
@@ -158,3 +159,14 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(HomeScreen);
+
+const styles = StyleSheet.create({
+  footer: {
+    height: 90
+  },
+  container: {
+    flex: 1,
+    backgroundColor: Colors.backgroundColor,
+    justifyContent: "center"
+  }
+});

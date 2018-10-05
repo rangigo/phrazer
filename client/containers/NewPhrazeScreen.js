@@ -1,36 +1,51 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { ScrollView, View, StyleSheet } from 'react-native';
-import Text from '../components/MyText';
-import { Icon, CheckBox, Button } from 'react-native-elements';
-import { Dropdown } from 'react-native-material-dropdown';
-import { TextField } from 'react-native-material-textfield';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { ScrollView, View, StyleSheet } from "react-native";
+import Text from "../components/MyText";
+import { Icon, CheckBox, Button } from "react-native-elements";
+import { Dropdown } from "react-native-material-dropdown";
+import { TextField } from "react-native-material-textfield";
 
-import * as actions from '../actions';
+import * as actions from "../actions";
+import Colors from "../config/colors";
+
+const data = [
+  { value: "Finnish" },
+  { value: "German" },
+  { value: "Lithuanian" },
+  { value: "Czech" }
+];
+
 class NewPhrazeScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerLeft: (
       <Icon
         name="close"
-        color="white"
+        color={Colors.text.white}
         onPress={() => navigation.dismiss()}
         underlayColor="transparent"
         containerStyle={{ marginLeft: 20 }}
       />
     ),
-    headerTitle: 'New Phraze',
-    headerRight: <Button buttonStyle={styles.saveButton} title="SAVE" onPress={() => navigation.state.params.handleSave()} />
+    headerTitle: "New Phraze",
+    headerRight: (
+      <Button
+        buttonStyle={styles.saveButton}
+        title="SAVE"
+        onPress={() => navigation.state.params.handleSave()}
+      />
+    )
   });
 
   state = {
-    category: '',
-    phraze: '',
-    translated: '',
+    category: "",
+    phraze: "",
+    translated: "",
     isPublic: false
   };
 
   componentDidMount() {
-    this.props.navigation.setParams({ handleSave: this.onPressSave})
+    this.props.navigation.setParams({ handleSave: this.onPressSave });
   }
 
   onPressSave = () => {
@@ -40,11 +55,11 @@ class NewPhrazeScreen extends Component {
       translated: this.state.translated,
       public: this.state.isPublic,
       phrazed: false,
-      favorite: false,
-    }
-    this.props.onSavePhraze(phraze)
-    this.props.navigation.dismiss()
-  }
+      favorite: false
+    };
+    this.props.onSavePhraze(phraze);
+    this.props.navigation.dismiss();
+  };
 
   render() {
     const { category, phraze, translated, isPublic } = this.state;
@@ -61,7 +76,7 @@ class NewPhrazeScreen extends Component {
           label="Phraze"
           value={phraze}
           onChangeText={phraze => this.setState({ phraze })}
-          tintColor="#33AAAA"
+          tintColor={Colors.mainColor.light}
           multiline
           fontSize={32}
         />
@@ -70,15 +85,15 @@ class NewPhrazeScreen extends Component {
           label="Translation"
           value={translated}
           onChangeText={translated => this.setState({ translated })}
-          tintColor="#33AAAA"
+          tintColor={Colors.mainColor.light}
           multiline
         />
 
         <View style={styles.recordContainer}>
-          <Text style={{ color: '#586D79', fontSize: 18 }}>Record</Text>
+          <Text style={{ color: "#586D79", fontSize: 18 }}>Record</Text>
           <Icon
             name="mic"
-            color="#33AAAA"
+            color={Colors.mainColor.light}
             reverse
             raised
             containerStyle={{ marginVertical: 15 }}
@@ -90,8 +105,8 @@ class NewPhrazeScreen extends Component {
           iconType="material"
           checkedIcon="check-box"
           uncheckedIcon="check-box-outline-blank"
-          checkedColor="#33AAAA"
-          textStyle={{ color: '#777777', fontWeight: '300' }}
+          checkedColor={Colors.mainColor.light}
+          textStyle={{ color: Colors.icon.grey.dark, fontWeight: "300" }}
           title="Public"
           checked={isPublic}
           onPress={() => this.setState({ isPublic: !isPublic })}
@@ -104,17 +119,17 @@ class NewPhrazeScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.backgroundColor,
     padding: 15
   },
   recordContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginVertical: 15
   },
   checkBoxContainer: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: Colors.backgroundColor,
     borderWidth: 0,
     padding: 0,
     marginLeft: 0,
@@ -122,8 +137,8 @@ const styles = StyleSheet.create({
     marginVertical: 0
   },
   saveButton: {
-    backgroundColor: 'transparent',
-    padding: 3,
+    backgroundColor: "transparent",
+    padding: 3
   }
 });
 

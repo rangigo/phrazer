@@ -1,13 +1,14 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Icon } from 'react-native-elements';
-import Text from './MyText';
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { Icon } from "react-native-elements";
+import Text from "./MyText";
+import Colors from "../config/colors";
 
 const PhrazeTip = ({ onPressCancel }) => {
   return (
     <View style={styles.phrazeTip}>
       <View style={{ flex: 0.2, paddingHorizontal: 10 }}>
-        <Icon name="check-box" color="white" />
+        <Icon name="check-box" color={Colors.icon.white} />
       </View>
       <View
         style={{
@@ -27,9 +28,9 @@ const PhrazeTip = ({ onPressCancel }) => {
 const styles = StyleSheet.create({
   phrazeTip: {
     paddingVertical: 10,
-    backgroundColor: '#D7D7D7',
-    flexDirection: 'row',
-    alignItems: 'center'
+    backgroundColor: Colors.tip.backgroundColor,
+    flexDirection: "row",
+    alignItems: "center"
   }
 });
 
