@@ -10,14 +10,14 @@ export const editPhrase = payload => ({
   payload
 });
 
-export const checkBoxPhraze = (key, opt) => ({
+export const checkBoxPhraze = (key, opt, item) => ({
   type: actionTypes.CHECK_BOX_PHRAZE,
   key,
-  opt
+  opt,
+  item
 });
 
-export const getPhrazesByCategory = (payload) => ({
+export const getPhrazesByCategory = payload => ({
   type: actionTypes.GET_PHRAZES_BY_CATEGORY,
   payload: payload
-})
-
+});

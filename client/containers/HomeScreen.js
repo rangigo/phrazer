@@ -139,7 +139,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onPhrazeAdded: phraze => dispatch(actions.addPhraze(phraze)),
-  onCheckBoxPhraze: (key, opt) => dispatch(actions.checkBoxPhraze(key, opt)),
+  onCheckBoxPhraze: (key, opt, item = null) =>
+    dispatch(actions.checkBoxPhraze(key, opt, item)),
   onGetPhrazesByCategory: category =>
     dispatch(actions.getPhrazesByCategory(category))
 });

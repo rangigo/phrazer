@@ -1,70 +1,70 @@
-import * as actionTypes from '../actions/actionTypes';
+import * as actionTypes from "../actions/actionTypes";
 
 const initState = {
   phrazes: [
     {
-      key: '1',
-      library: 'finnish',
-      category: 'Greeting',
-      phraze: 'How are you doing?',
-      translated: 'Mitä kuuluu?',
+      key: "1",
+      library: "finnish",
+      category: "Greeting",
+      phraze: "How are you doing?",
+      translated: "Mitä kuuluu?",
       public: false,
       phrazed: false,
       favorite: true
     },
     {
-      key: '2',
-      library: 'finnish',
-      category: 'Greeting',
-      phraze: 'Where are you from?',
-      translated: 'Mistä olet kotoisin?',
+      key: "2",
+      library: "finnish",
+      category: "Greeting",
+      phraze: "Where are you from?",
+      translated: "Mistä olet kotoisin?",
       public: false,
       phrazed: true,
       favorite: true
     },
     {
-      key: '3',
-      library: 'finnish',
-      category: 'Greeting',
-      phraze: 'What is your name?',
-      translated: 'Mikä on sinun nimesi?',
-      public: true,
-      phrazed: false,
-      favorite: false
-    },
-    {
-      key: '4',
-      library: 'finnish',
-      category: 'Hangout',
-      phraze: 'Do you speak english?',
-      translated: 'Puhutko englantia?',
+      key: "3",
+      library: "finnish",
+      category: "Greeting",
+      phraze: "What is your name?",
+      translated: "Mikä on sinun nimesi?",
       public: false,
       phrazed: false,
       favorite: false
     },
     {
-      key: '5',
-      library: 'finnish',
-      category: 'Meeting',
-      phraze: 'It was nice to meet you',
-      translated: 'Oli kiva tavata',
-      public: true,
+      key: "4",
+      library: "finnish",
+      category: "Hangout",
+      phraze: "Do you speak english?",
+      translated: "Puhutko englantia?",
+      public: false,
+      phrazed: false,
+      favorite: false
+    },
+    {
+      key: "5",
+      library: "finnish",
+      category: "Meeting",
+      phraze: "It was nice to meet you",
+      translated: "Oli kiva tavata",
+      public: false,
       phrazed: true,
       favorite: true
     },
     {
-      key: '9',
-      library: 'finnish',
-      category: 'Hangout',
-      phraze: 'You are welcome',
-      translated: 'Ole hyvä',
+      key: "6",
+      library: "finnish",
+      category: "Hangout",
+      phraze: "You are welcome",
+      translated: "Ole hyvä",
       public: false,
       phrazed: true,
       favorite: false
     }
   ],
   phrazesByCategory: [],
-  selectedCategory: '',
+  selectedCategory: ""
 };
 
 export default (state = initState, action) => {
@@ -91,20 +91,20 @@ export default (state = initState, action) => {
         ...state,
         phrazes: state.phrazes.concat({
           ...action.payload,
-          key: state.phrazes.length + '1'
+          key: state.phrazes.length + "1"
         })
       };
     case actionTypes.CHECK_BOX_PHRAZE:
       const newPhrazes = state.phrazes.map(el => {
         if (el.key === action.key) {
           switch (action.opt) {
-            case 'public':
+            case "public":
               el.public = !el.public;
               return el;
-            case 'phrazed':
+            case "phrazed":
               el.phrazed = !el.phrazed;
               return el;
-            case 'favorite':
+            case "favorite":
               el.favorite = !el.favorite;
               return el;
           }
@@ -122,7 +122,7 @@ export default (state = initState, action) => {
       return {
         ...state,
         phrazesByCategory,
-        selectedCategory: action.payload,
+        selectedCategory: action.payload
       };
     default:
       return state;

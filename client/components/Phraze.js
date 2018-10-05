@@ -8,7 +8,6 @@ import {
   CardTitle,
   CardContent,
   CardAction,
-  CardButton,
   CardButtonIcon
 } from "./../material-cards-custom";
 import Colors from "../config/colors";
@@ -52,7 +51,11 @@ class Phraze extends Component {
         {foreign}
         <CardAction separator={false} inColumn={false} style={styles.actions}>
           <CardButtonIcon
-            onPress={() => onPressCheckBox(item.key, "public")}
+            onPress={() =>
+              item.public
+                ? onPressCheckBox(item.key, "public")
+                : onPressCheckBox(item.key, "public", item)
+            }
             icon={currentButtonsState.public.icon}
             color={currentButtonsState.public.color}
           />
