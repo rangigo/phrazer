@@ -1,17 +1,15 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
-import { CheckBox, Icon } from "react-native-elements";
-import Text from "./MyText";
 
 import {
   Card,
   CardTitle,
   CardContent,
   CardAction,
-  CardButton,
   CardButtonIcon
 } from "./../material-cards-custom";
 import Colors from "../config/colors";
+import { Icon } from "react-native-elements";
 
 class Phraze extends Component {
   constructor(props) {
@@ -46,6 +44,20 @@ class Phraze extends Component {
       <View />
     );
 
+    const soundBtn = item.sound ? (
+      <CardButtonIcon
+        onPress={() => {}}
+        icon="volume-mute"
+        color={inactiveButtonColor}
+      />
+    ) : (
+      <CardButtonIcon
+        onPress={() => {}}
+        icon="volume-off"
+        color={inactiveButtonColor}
+      />
+    );
+
     return (
       <Card>
         <CardTitle title={item.phraze} subtitleAbove={true} />
@@ -61,11 +73,7 @@ class Phraze extends Component {
             icon={currentButtonsState.learned.icon}
             color={currentButtonsState.learned.color}
           />
-          <CardButtonIcon
-            onPress={() => {}}
-            icon="volume-mute"
-            color={inactiveButtonColor}
-          />
+          {soundBtn}
           <CardButtonIcon
             onPress={() => onPressCheckBox(item.key, "favorite")}
             icon={currentButtonsState.favorite.icon}
