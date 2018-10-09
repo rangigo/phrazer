@@ -10,10 +10,11 @@ export const editPhrase = payload => ({
   payload
 });
 
-export const checkBoxPhraze = (key, opt) => ({
+export const checkBoxPhraze = (key, opt, item) => ({
   type: actionTypes.CHECK_BOX_PHRAZE,
   key,
-  opt
+  opt,
+  item
 });
 
 export const deletePhraze = payload => ({
