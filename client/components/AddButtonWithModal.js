@@ -1,25 +1,26 @@
-import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Icon, Button } from 'react-native-elements';
-import Modal from 'react-native-modal';
+import React, { Component } from "react";
+import { StyleSheet, View } from "react-native";
+import { Icon, Button } from "react-native-elements";
+import Modal from "react-native-modal";
 
-import Text from './MyText';
+import Text from "./MyText";
+import Colors from "../config/colors";
 
 const NewPhrazeOptions = [
   {
-    title: 'Add new phraze',
-    icon: { name: 'translate', color: 'black' },
-    navigateScreen: 'NewPhrazeScreen'
+    title: "Add new phraze",
+    icon: { name: "translate", color: Colors.text.dark },
+    navigateScreen: "NewPhrazeScreen"
   },
   {
-    title: 'Add new category',
-    icon: { name: 'list', color: 'black' },
-    navigateScreen: 'NewPhrazeScreen'
+    title: "Add new category",
+    icon: { name: "list", color: Colors.text.dark },
+    navigateScreen: "NewPhrazeScreen"
   },
   {
-    title: 'Add new library',
-    icon: { name: 'local-library', color: 'black' },
-    navigateScreen: 'NewPhrazeScreen'
+    title: "Add new library",
+    icon: { name: "local-library", color: Colors.text.dark },
+    navigateScreen: "NewPhrazeScreen"
   }
 ];
 
@@ -47,11 +48,11 @@ class AddButtonWithModal extends Component {
         <Icon
           name="add"
           containerStyle={{
-            position: 'absolute',
+            position: "absolute",
             bottom: 15,
             right: 15
           }}
-          color="#33AAAA"
+          color={Colors.mainColor.light}
           reverse
           raised
           onPress={this.showModal}
@@ -68,10 +69,10 @@ class AddButtonWithModal extends Component {
                 title={el.title}
                 icon={el.icon}
                 containerViewStyle={styles.buttonContainerStyle}
-                buttonStyle={{ justifyContent: 'flex-start' }}
+                buttonStyle={{ justifyContent: "flex-start" }}
                 key={el.title}
-                color="black"
-                backgroundColor="white"
+                color={Colors.text.dark}
+                backgroundColor={Colors.backgroundColor}
                 onPress={() => this.onPressButton(el.navigateScreen)}
               />
             ))}
@@ -84,25 +85,25 @@ class AddButtonWithModal extends Component {
 
 const styles = StyleSheet.create({
   bottomModal: {
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     margin: 0
   },
   modalTitle: {
-    color: '#727272',
+    color: Colors.text.dark,
     padding: 10
   },
   modalContent: {
-    backgroundColor: 'white',
+    backgroundColor: Colors.backgroundColor,
     paddingLeft: 5,
     paddingVertical: 20,
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start'
+    alignItems: "flex-start",
+    justifyContent: "flex-start"
   },
   buttonContainerStyle: {
-    alignSelf: 'stretch'
+    alignSelf: "stretch"
   },
   buttonStyle: {
-    justifyContent: 'flex-start'
+    justifyContent: "flex-start"
   }
 });
 

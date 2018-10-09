@@ -1,33 +1,33 @@
-import * as actionTypes from "../actions/actionTypes";
+import * as actionTypes from '../actions/actionTypes';
 
 const initState = {
   phrazes: [
     {
-      key: "1",
-      library: "finnish",
-      category: "meeting",
-      phraze: "How are you doing?",
-      translated: "Mitä kuuluu?",
+      key: '1',
+      library: 'finnish',
+      category: 'Greeting',
+      phraze: 'How are you doing?',
+      translated: 'Mitä kuuluu?',
       public: false,
       phrazed: false,
       favorite: true
     },
     {
-      key: "2",
-      library: "finnish",
-      category: "meeting",
-      phraze: "Where are you from?",
-      translated: "Mistä olet kotoisin?",
+      key: '2',
+      library: 'finnish',
+      category: 'Greeting',
+      phraze: 'Where are you from?',
+      translated: 'Mistä olet kotoisin?',
       public: false,
       phrazed: true,
       favorite: true
     },
     {
-      key: "3",
-      library: "finnish",
-      category: "meeting",
-      phraze: "What is your name?",
-      translated: "Mikä on sinun nimesi?",
+      key: '3',
+      library: 'finnish',
+      category: 'Greeting',
+      phraze: 'What is your name?',
+      translated: 'Mikä on sinun nimesi?',
       public: true,
       phrazed: false,
       favorite: false
@@ -43,26 +43,28 @@ const initState = {
       favorite: false
     },
     {
-      key: "5",
-      library: "finnish",
-      category: "meeting",
-      phraze: "It was nice to meet you",
-      translated: "Oli kiva tavata",
+      key: '5',
+      library: 'finnish',
+      category: 'Meeting',
+      phraze: 'It was nice to meet you',
+      translated: 'Oli kiva tavata',
       public: true,
       phrazed: true,
       favorite: true
     },
     {
-      key: "9",
-      library: "finnish",
-      category: "meeting",
-      phraze: "You are welcome",
-      translated: "Ole hyvä",
+      key: '9',
+      library: 'finnish',
+      category: 'Hangout',
+      phraze: 'You are welcome',
+      translated: 'Ole hyvä',
       public: false,
       phrazed: true,
       favorite: false
     }
-  ]
+  ],
+  phrazesByCategory: [],
+  selectedCategory: '',
 };
 
 export default (state = initState, action) => {
@@ -89,7 +91,7 @@ export default (state = initState, action) => {
         ...state,
         phrazes: state.phrazes.concat({
           ...action.payload,
-          key: state.phrazes.length + "1"
+          key: state.phrazes.length + '1'
         })
       };
     case actionTypes.DELETE_PHRAZE:
@@ -107,13 +109,13 @@ export default (state = initState, action) => {
       const newPhrazes = state.phrazes.map(el => {
         if (el.key === action.key) {
           switch (action.opt) {
-            case "public":
+            case 'public':
               el.public = !el.public;
               return el;
-            case "phrazed":
+            case 'phrazed':
               el.phrazed = !el.phrazed;
               return el;
-            case "favorite":
+            case 'favorite':
               el.favorite = !el.favorite;
               return el;
           }
@@ -123,6 +125,15 @@ export default (state = initState, action) => {
       return {
         ...state,
         phrazes: newPhrazes
+      };
+    case actionTypes.GET_PHRAZES_BY_CATEGORY:
+      const phrazesByCategory = state.phrazes.filter(
+        phraze => phraze.category === action.payload
+      );
+      return {
+        ...state,
+        phrazesByCategory,
+        selectedCategory: action.payload,
       };
     default:
       return state;

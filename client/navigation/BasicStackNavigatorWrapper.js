@@ -1,22 +1,16 @@
 import React from "react";
-
 import { createStackNavigator } from "react-navigation";
+import { Icon } from "react-native-elements";
+import Colors from "../config/colors";
 
-import HomeScreen from "../containers/HomeScreen";
-
-const BasicStackWrapper = (
-  leftHeaderButton,
-  rightHeaderButton,
-  title,
-  routes
-) => {
+const BasicStackWrapper = (leftHeaderName, rightHeaderName, title, routes) => {
   return createStackNavigator(routes, {
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: {
       title: title,
-      headerLeft: leftHeaderButton,
-      headerRight: rightHeaderButton,
+      headerLeft: <Icon name={leftHeaderName} color={Colors.icon.white} />,
+      headerRight: <Icon name={rightHeaderName} color={Colors.icon.white} />,
       headerStyle: {
-        backgroundColor: "#4AA9A8"
+        backgroundColor: Colors.mainColor.light
       },
       headerLeftContainerStyle: {
         marginLeft: 20
@@ -26,9 +20,9 @@ const BasicStackWrapper = (
       },
       headerTitleStyle: {
         fontFamily: "Roboto",
-        color: "white"
+        color: Colors.text.white
       }
-    })
+    }
   });
 };
 

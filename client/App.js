@@ -6,7 +6,7 @@ import { createStore } from "redux";
 import reducers from "./reducers";
 
 import { createSwitchNavigator, createStackNavigator } from "react-navigation";
-import createDismissableStackNavigator from "./helpers/createDissmissableStackNavigator";
+import createDismissableStackNavigator from "./navigation/helpers/createDissmissableStackNavigator";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 
 import LoginScreen from "./components/LoginScreen";
@@ -14,7 +14,8 @@ import NewPhrazeScreen from "./containers/NewPhrazeScreen";
 import PhrazeDetailScreen from "./containers/PhrazeDetailScreen";
 
 Expo.Font.loadAsync({
-  Roboto: require("./fonts/Roboto/Roboto-Regular.ttf")
+  Roboto: require("./fonts/Roboto/Roboto-Regular.ttf"),
+  "Roboto-Bold": require("./fonts/Roboto/Roboto-Black.ttf")
 });
 
 const NewPhrazeStack = createDismissableStackNavigator(
@@ -38,7 +39,7 @@ const NewPhrazeStack = createDismissableStackNavigator(
 const RootStack = createStackNavigator(
   {
     BottomTabNavigator,
-    NewPhrazeStack
+    NewPhrazeStack,
   },
   {
     mode: "modal",

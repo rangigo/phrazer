@@ -3,12 +3,13 @@ import React from "react";
 import Text from "./MyText";
 import { StyleSheet, View } from "react-native";
 import { Button } from "react-native-elements";
+import Colors from "./../config/colors";
 
 const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
-        <Text h4 style={{ letterSpacing: 3, color: "#616161" }}>
+        <Text h4 style={styles.descBeforeLogo}>
           welcome to
         </Text>
         <Text h1 style={styles.logoTxt}>
@@ -17,7 +18,7 @@ const LoginScreen = ({ navigation }) => {
       </View>
       <Button title="LOG IN" buttonStyle={styles.loginBtn} />
       <Text
-        style={{ textDecorationLine: "underline", color: "white" }}
+        style={styles.skipBtn}
         onPress={() => navigation.navigate("HomeStack")}
       >
         Skip this step
@@ -29,7 +30,7 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#4AA9A8",
+    backgroundColor: Colors.mainColor.light,
     alignItems: "center",
     justifyContent: "center"
   },
@@ -41,8 +42,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     paddingVertical: 14,
     marginBottom: 14,
-    backgroundColor: "#3B7A77",
+    backgroundColor: Colors.mainColor.dark,
     borderRadius: 3
+  },
+  skipBtn: {
+    textDecorationLine: "underline",
+    color: Colors.text.white
+  },
+  descBeforeLogo: {
+    letterSpacing: 3,
+    color: Colors.text.dark
   },
   logoTxt: {
     color: "white",
