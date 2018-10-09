@@ -151,11 +151,11 @@ class PhrazeDetailScreen extends Component {
             onPress={() => this.setState({ isPublic: !isPublic })}
           />
           <Icon
-              name="delete"
-              containerStyle={styles.deleteButtonContainer}
-              onPress={this.handleDelete}
-              color="#ff0000"
-              size={28}
+            name="delete"
+            containerStyle={styles.deleteButtonContainer}
+            onPress={this.handleDelete}
+            color="#ff0000"
+            size={28}
           />
         </ScrollView>
       </AndroidBackHandler>
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => ({
   onSavePhraze: phraze => dispatch(actions.editPhrase(phraze)),
-  onDeletePhraze: phrazeKey => dispatch(actions.deletePhraze(phrazeKey))
+  onDeletePhraze: phrazeKey => dispatch(actions.deletePhraze(phrazeKey)),
   onGetPhrazesByCategory: category =>
     dispatch(actions.getPhrazesByCategory(category))
 });
