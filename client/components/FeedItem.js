@@ -25,6 +25,7 @@ class FeedItem extends Component {
     if (this.state.added) return;
 
     onImportButtonPressed({
+      category: "New",
       phraze: item.native,
       translated: item.foreign,
       public: false,
