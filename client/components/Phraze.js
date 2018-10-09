@@ -46,6 +46,8 @@ class Phraze extends Component {
       <View />
     );
 
+    console.log(item);
+
     return (
       <Card>
         <CardTitle title={item.phraze} subtitleAbove={true} />

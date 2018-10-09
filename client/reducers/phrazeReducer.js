@@ -33,11 +33,11 @@ const initState = {
       favorite: false
     },
     {
-      key: '4',
-      library: 'finnish',
-      category: 'Hangout',
-      phraze: 'Do you speak english?',
-      translated: 'Puhutko englantia?',
+      key: "4",
+      library: "finnish",
+      category: "meeting",
+      phraze: "Do you speak english?",
+      translated: "Puhutko englantia?",
       public: false,
       phrazed: false,
       favorite: false
@@ -93,6 +93,17 @@ export default (state = initState, action) => {
           ...action.payload,
           key: state.phrazes.length + '1'
         })
+      };
+    case actionTypes.DELETE_PHRAZE:
+      let temp = [];
+      state.phrazes.forEach(item => {
+        if (item.key !== action.payload) {
+          temp.push(item);
+        }
+      });
+      return {
+        ...state,
+        phrazes: temp
       };
     case actionTypes.CHECK_BOX_PHRAZE:
       const newPhrazes = state.phrazes.map(el => {

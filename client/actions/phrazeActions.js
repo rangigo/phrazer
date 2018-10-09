@@ -16,8 +16,12 @@ export const checkBoxPhraze = (key, opt) => ({
   opt
 });
 
+export const deletePhraze = payload => ({
+  type: actionTypes.DELETE_PHRAZE,
+  payload
+});
+
 export const getPhrazesByCategory = (payload) => ({
   type: actionTypes.GET_PHRAZES_BY_CATEGORY,
   payload: payload
 })
-
