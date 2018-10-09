@@ -5,7 +5,7 @@ const feedInit = [
     author: { fullName: "Martynas Gudaitis" },
     native: "How much it costs?",
     foreign: "Paljonko se maksaa?",
-    key: "6"
+    key: "9"
   },
   {
     author: { fullName: "Lena Schwarz" },
@@ -29,8 +29,22 @@ const feedInit = [
 
 export default (state = feedInit, action) => {
   switch (action.type) {
-    case "actionTy":
-      break;
+    case actionTypes.CHECK_BOX_PHRAZE:
+      let newFeed = [...state];
+
+      if ((action.opt = "public")) {
+        if (action.item) {
+          newFeed.push({
+            author: { fullName: "Paulius Karlonas" },
+            native: action.item.phraze,
+            foreign: action.item.translated,
+            key: action.item.key
+          });
+        } else {
+          newFeed = newFeed.filter(item => item.key !== action.key);
+        }
+      }
+      return newFeed;
 
     default:
       return state;

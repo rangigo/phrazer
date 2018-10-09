@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { ScrollView, View, StyleSheet } from "react-native";
+import { ScrollView, View, StyleSheet, Alert } from "react-native";
 import Text from "../components/MyText";
 import { Icon, CheckBox, Button } from "react-native-elements";
 import { TextField } from "react-native-material-textfield";
@@ -72,6 +72,27 @@ class PhrazeDetailScreen extends Component {
     return true;
   };
 
+  handleDelete = () => {
+    Alert.alert(
+      "Please Confirm",
+      "Are you sure you want to delete\nthis Phraze?",
+      [
+        { text: "Cancel", onPress: () => console.log("Cancel") },
+        {
+          text: "Confirm",
+          onPress: () => {
+            const item = this.props.navigation.getParam("item", {});
+            const phraze = { ...item };
+
+            this.props.onDeletePhraze(phraze.key);
+            this.props.navigation.dismiss();
+          }
+        }
+      ],
+      { cancelable: true }
+    );
+  };
+
   render() {
     const { navigation } = this.props;
     const { phraze, translated, category, isPublic } = this.state;
@@ -129,6 +150,13 @@ class PhrazeDetailScreen extends Component {
             checked={isPublic}
             onPress={() => this.setState({ isPublic: !isPublic })}
           />
+          <Icon
+            name="delete"
+            containerStyle={styles.deleteButtonContainer}
+            onPress={this.handleDelete}
+            color="#ff0000"
+            size={28}
+          />
         </ScrollView>
       </AndroidBackHandler>
     );
@@ -158,11 +186,16 @@ const styles = StyleSheet.create({
   saveButton: {
     backgroundColor: "transparent",
     padding: 3
+  },
+  deleteButtonContainer: {
+    marginVertical: 15,
+    alignItems: "flex-start"
   }
 });
 
 const mapDispatchToProps = dispatch => ({
   onSavePhraze: phraze => dispatch(actions.editPhrase(phraze)),
+  onDeletePhraze: phrazeKey => dispatch(actions.deletePhraze(phrazeKey)),
   onGetPhrazesByCategory: category =>
     dispatch(actions.getPhrazesByCategory(category))
 });
