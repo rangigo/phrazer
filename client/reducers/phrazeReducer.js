@@ -35,7 +35,7 @@ const initState = {
     {
       key: "4",
       library: "finnish",
-      category: "meeting",
+      category: "Meeting",
       phraze: "Do you speak english?",
       translated: "Puhutko englantia?",
       public: false,
